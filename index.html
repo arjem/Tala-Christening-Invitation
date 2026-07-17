@@ -1,0 +1,1197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#060B1E">
+<title>Starr Azrielle — Christening &amp; First Birthday</title>
+<meta name="description" content="Join us as we celebrate Starr Azrielle's Christening and First Birthday — August 23, 2026.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500;1,9..144,600&family=Karla:wght@400;500;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --navy-deep:#060B1E;
+    --navy-mid:#0F1B3D;
+    --navy-glow:#16234C;
+    --card-line:rgba(244,200,106,0.18);
+    --gold:#F4C86A;
+    --gold-soft:#D9B26B;
+    --ivory:#F5EFE1;
+    --ivory-dim:rgba(245,239,225,0.68);
+    --blush:#E8A9B8;
+    --royal-blue:#3B4E9E;
+    --star-blue:#9FC2FF;
+    --max-w:560px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
+  }
+
+  body{
+    margin:0;
+    background:
+      radial-gradient(ellipse at 50% -10%, #1a2a5c 0%, var(--navy-mid) 38%, var(--navy-deep) 75%);
+    color:var(--ivory);
+    font-family:'Karla', sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    overflow-x:hidden;
+    position:relative;
+  }
+
+  /* ---------- starfield ---------- */
+  #starfield{
+    position:fixed;
+    inset:0;
+    z-index:0;
+    pointer-events:none;
+    overflow:hidden;
+  }
+  .star{
+    position:absolute;
+    background:var(--ivory);
+    border-radius:50%;
+    opacity:0.6;
+    animation:twinkle ease-in-out infinite;
+  }
+  @keyframes twinkle{
+    0%,100%{opacity:0.15; transform:scale(0.8);}
+    50%{opacity:0.95; transform:scale(1.15);}
+  }
+  .shooting-star{
+    position:absolute;
+    width:2px;
+    height:2px;
+    background:linear-gradient(90deg, #fff, transparent);
+    border-radius:50%;
+    filter:drop-shadow(0 0 6px #fff);
+    animation:shoot 6s linear infinite;
+    opacity:0;
+  }
+  @keyframes shoot{
+    0%{opacity:0; transform:translate(0,0);}
+    2%{opacity:1;}
+    15%{opacity:0; transform:translate(-220px,220px);}
+    100%{opacity:0;}
+  }
+
+  .wrap{
+    position:relative;
+    z-index:1;
+    max-width:var(--max-w);
+    margin:0 auto;
+    padding:0 24px;
+  }
+  .full-bleed{
+    position:relative;
+    z-index:1;
+  }
+
+  /* ---------- shared type ---------- */
+  .eyebrow{
+    font-family:'Space Mono', monospace;
+    font-size:0.72rem;
+    letter-spacing:0.22em;
+    text-transform:uppercase;
+    color:var(--gold);
+    text-align:center;
+    margin:0 0 14px;
+  }
+  h1,h2,h3{
+    font-family:'Fraunces', serif;
+    font-weight:600;
+    margin:0;
+  }
+  .section{
+    padding:72px 0;
+    position:relative;
+  }
+  .section-title{
+    font-size:1.7rem;
+    text-align:center;
+    color:var(--ivory);
+    margin-bottom:8px;
+  }
+  .section-sub{
+    text-align:center;
+    color:var(--ivory-dim);
+    font-size:0.95rem;
+    max-width:400px;
+    margin:0 auto 40px;
+  }
+
+  /* ornamental flourish divider */
+  .divider{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    width:100%;
+    max-width:220px;
+    margin:0 auto;
+    padding:0;
+    opacity:0.75;
+  }
+  .divider svg{width:100%; height:auto; display:block;}
+  .divider .stem{flex:1; height:1px; background:linear-gradient(90deg, transparent, var(--card-line));}
+  .divider .stem.r{background:linear-gradient(90deg, var(--card-line), transparent);}
+
+  /* reveal-on-scroll */
+  .reveal{opacity:0; transform:translateY(18px); transition:opacity 0.8s ease, transform 0.8s ease;}
+  .reveal.visible{opacity:1; transform:translateY(0);}
+
+  /* corner-bracket ornament, reused on cards */
+  .ornate{position:relative;}
+  .ornate::before, .ornate::after{
+    content:'';
+    position:absolute;
+    width:16px;
+    height:16px;
+    border:1px solid var(--gold-soft);
+    opacity:0.7;
+  }
+  .ornate::before{ top:-1px; left:-1px; border-right:none; border-bottom:none; }
+  .ornate::after{ bottom:-1px; right:-1px; border-left:none; border-top:none; }
+
+  /* ---------- hero ---------- */
+  .hero{
+    min-height:100svh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:56px 24px 40px;
+  }
+  .crown-svg{width:90px; height:auto; margin-bottom:12px;}
+  .hero .eyebrow{margin-bottom:16px;}
+
+  .celebrant-frame{
+    width:186px;
+    height:186px;
+    border-radius:50%;
+    padding:5px;
+    background:conic-gradient(from 0deg, var(--gold), var(--star-blue), var(--blush), var(--gold));
+    margin-bottom:20px;
+    box-shadow:0 0 34px rgba(244,200,106,0.28);
+  }
+  .celebrant-frame .inner{
+    width:100%;
+    height:100%;
+    border-radius:50%;
+    overflow:hidden;
+    background:var(--navy-mid);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .celebrant-frame img{width:100%; height:100%; object-fit:cover; display:block;}
+
+  .hero-name{
+    font-size:2.9rem;
+    font-style:italic;
+    font-weight:600;
+    line-height:1.08;
+    background:linear-gradient(180deg, #FDEFC7 0%, var(--gold) 55%, var(--gold-soft) 100%);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    letter-spacing:0.01em;
+  }
+  .name-swash{width:140px; height:auto; margin-top:6px;}
+  .hero-occasion{
+    margin-top:16px;
+    font-family:'Fraunces', serif;
+    font-size:1.1rem;
+    color:var(--ivory);
+    font-weight:400;
+  }
+  .hero-occasion span{color:var(--blush); font-style:italic;}
+
+  /* music pill + toggle */
+  .music-pill{
+    margin-top:22px;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    font-family:'Space Mono', monospace;
+    font-size:0.68rem;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--ivory);
+    background:rgba(244,200,106,0.08);
+    border:1px solid var(--card-line);
+    border-radius:30px;
+    padding:9px 18px;
+    cursor:pointer;
+    transition:background 0.2s ease;
+  }
+  .music-pill:hover{background:rgba(244,200,106,0.14);}
+  .music-fab{
+    position:fixed;
+    right:18px;
+    bottom:18px;
+    z-index:20;
+    width:46px;
+    height:46px;
+    border-radius:50%;
+    background:var(--navy-mid);
+    border:1px solid var(--gold-soft);
+    color:var(--gold);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    cursor:pointer;
+    box-shadow:0 4px 18px rgba(0,0,0,0.4);
+  }
+  .music-fab.show{display:flex;}
+
+  /* wax-seal date badge + countdown, merged in hero */
+  .hero-datestrip{
+    margin-top:28px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:20px;
+  }
+  .date-badge{
+    position:relative;
+    width:132px;
+    height:132px;
+    border-radius:50%;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:2px;
+    background:radial-gradient(circle at 50% 40%, rgba(244,200,106,0.10), rgba(244,200,106,0.02) 70%);
+    border:1px solid var(--gold-soft);
+    box-shadow:inset 0 0 0 4px rgba(6,11,30,0.6), inset 0 0 0 5px rgba(244,200,106,0.35);
+  }
+  .date-badge .seal-star{color:var(--blush); font-size:0.65rem; margin-bottom:2px;}
+  .date-badge .d{font-family:'Space Mono', monospace; font-size:0.76rem; letter-spacing:0.05em; color:var(--gold); text-align:center;}
+  .date-badge .t{font-family:'Space Mono', monospace; font-size:0.6rem; letter-spacing:0.05em; color:var(--ivory-dim); text-align:center;}
+
+  .countdown{display:flex; justify-content:center; gap:8px; flex-wrap:wrap;}
+  .count-box{
+    background:rgba(244,200,106,0.07);
+    border:1px solid var(--card-line);
+    border-radius:3px;
+    padding:12px 5px;
+    width:64px;
+    text-align:center;
+    box-shadow:0 0 16px rgba(244,200,106,0.10);
+  }
+  .count-box .num{font-family:'Fraunces', serif; font-size:1.35rem; color:var(--gold); font-weight:600;}
+  .count-box .lbl{font-family:'Space Mono', monospace; font-size:0.55rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--ivory-dim); margin-top:3px;}
+
+  .scroll-cue{
+    margin-top:40px;
+    font-family:'Space Mono', monospace;
+    font-size:0.65rem;
+    letter-spacing:0.2em;
+    text-transform:uppercase;
+    color:var(--ivory-dim);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:8px;
+  }
+  .scroll-cue .line{width:1px; height:24px; background:var(--ivory-dim); animation:cue 1.8s ease-in-out infinite;}
+  @keyframes cue{0%,100%{transform:scaleY(0.6); opacity:0.4;} 50%{transform:scaleY(1); opacity:1;}}
+
+  /* ---------- name meaning ---------- */
+  .meaning-grid{
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+    margin-bottom:26px;
+  }
+  .meaning-card{
+    padding:22px;
+    border:1px solid var(--card-line);
+    border-radius:4px;
+    background:rgba(244,200,106,0.03);
+    text-align:center;
+  }
+  .meaning-card .word{
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-size:1.5rem;
+    color:var(--gold);
+    margin-bottom:8px;
+  }
+  .meaning-card .def{
+    color:var(--ivory-dim);
+    font-size:0.9rem;
+  }
+  .sky-note{
+    text-align:center;
+    font-size:0.98rem;
+    color:var(--ivory-dim);
+    max-width:420px;
+    margin:0 auto;
+  }
+  .sky-note em{color:var(--star-blue); font-style:italic;}
+  .sky-note .name-tag{color:var(--blush); font-style:italic;}
+
+  /* ---------- calendar ---------- */
+  .calendar-card{
+    border:1px solid var(--card-line);
+    border-radius:6px;
+    background:rgba(244,200,106,0.03);
+    padding:24px 18px 20px;
+    max-width:340px;
+    margin:0 auto;
+  }
+  .calendar-head{
+    text-align:center;
+    font-family:'Space Mono', monospace;
+    letter-spacing:0.14em;
+    font-size:0.82rem;
+    color:var(--gold);
+    text-transform:uppercase;
+    margin-bottom:16px;
+  }
+  .cal-grid{display:grid; grid-template-columns:repeat(7,1fr); gap:6px;}
+  .cal-dow{
+    text-align:center;
+    font-family:'Space Mono', monospace;
+    font-size:0.6rem;
+    letter-spacing:0.06em;
+    color:var(--ivory-dim);
+    padding-bottom:4px;
+  }
+  .cal-day{
+    text-align:center;
+    font-size:0.82rem;
+    color:var(--ivory-dim);
+    padding:7px 0;
+    border-radius:50%;
+  }
+  .cal-day.empty{opacity:0;}
+  .cal-day.marked{
+    background:var(--gold);
+    color:var(--navy-deep);
+    font-weight:700;
+    box-shadow:0 0 14px rgba(244,200,106,0.55);
+    position:relative;
+  }
+
+  /* ---------- family slider ---------- */
+  .slider{
+    position:relative;
+    width:100%;
+    aspect-ratio:4/3;
+    border-radius:6px;
+    overflow:hidden;
+    border:1px solid var(--card-line);
+  }
+  .slider-track{
+    display:flex;
+    height:100%;
+    transition:transform 0.6s ease;
+  }
+  .slider-track img{width:100%; height:100%; object-fit:cover; flex:none;}
+  .slider-dots{
+    display:flex;
+    justify-content:center;
+    gap:7px;
+    margin-top:14px;
+  }
+  .slider-dots span{
+    width:6px; height:6px;
+    border-radius:50%;
+    background:var(--card-line);
+    transition:background 0.3s ease;
+  }
+  .slider-dots span.active{background:var(--gold);}
+
+  /* ---------- dress code ---------- */
+  .dress-row{
+    display:flex;
+    justify-content:center;
+    gap:36px;
+    margin:26px 0 10px;
+  }
+  .swatch{text-align:center;}
+  .swatch .dot{
+    width:52px; height:52px;
+    border-radius:50%;
+    margin:0 auto 10px;
+    border:1px solid var(--card-line);
+  }
+  .swatch .dot.white{background:#F5EFE1; box-shadow:0 0 14px rgba(245,239,225,0.35);}
+  .swatch .dot.royal{background:var(--royal-blue); box-shadow:0 0 14px rgba(59,78,158,0.55);}
+  .swatch .lbl{font-family:'Space Mono', monospace; font-size:0.62rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--ivory-dim);}
+
+  /* ---------- event / venue cards ---------- */
+  .card{
+    border:1px solid var(--card-line);
+    background:linear-gradient(180deg, rgba(244,200,106,0.05), rgba(244,200,106,0.015));
+    border-radius:4px;
+    padding:0 0 22px;
+    margin-bottom:26px;
+    overflow:hidden;
+  }
+  .venue-photo{width:100%; height:170px; object-fit:cover; display:block;}
+  .card-body{padding:20px 22px 0;}
+  .card-kicker{
+    font-family:'Space Mono', monospace;
+    font-size:0.66rem;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:10px;
+  }
+  .card h3{font-size:1.3rem; color:var(--ivory); margin-bottom:6px;}
+  .card .addr{color:var(--ivory-dim); font-size:0.9rem; margin-bottom:16px;}
+  .card .when{
+    font-family:'Space Mono', monospace;
+    font-size:0.8rem;
+    color:var(--star-blue);
+    margin-bottom:16px;
+    letter-spacing:0.03em;
+  }
+  .map-frame{
+    width:100%;
+    height:180px;
+    border:0;
+    border-radius:3px;
+    filter:grayscale(0.25) invert(0.92) contrast(0.9);
+    margin-bottom:14px;
+    display:block;
+  }
+  .btn{
+    display:inline-block;
+    font-family:'Space Mono', monospace;
+    font-size:0.72rem;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    text-decoration:none;
+    color:var(--navy-deep);
+    background:var(--gold);
+    padding:11px 18px;
+    border-radius:2px;
+    border:none;
+    cursor:pointer;
+    transition:transform 0.2s ease, background 0.2s ease;
+  }
+  .btn:hover{background:var(--ivory); transform:translateY(-1px);}
+  .btn-outline{background:transparent; color:var(--gold); border:1px solid var(--gold);}
+  .btn-outline:hover{background:rgba(244,200,106,0.1); color:var(--gold);}
+
+  /* ---------- save the date ---------- */
+  .std-card{
+    text-align:center;
+    padding:36px 24px;
+  }
+  .std-card .big-date{
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-size:2.1rem;
+    color:var(--gold);
+    margin:10px 0 4px;
+  }
+  .std-card .sub{color:var(--ivory-dim); font-size:0.88rem; margin-bottom:22px;}
+
+  /* ---------- RSVP ---------- */
+  .rsvp-box{text-align:center; border:1px solid var(--card-line); border-radius:4px; padding:32px 22px; background:rgba(244,200,106,0.04);}
+  .rsvp-box p{color:var(--ivory-dim); font-size:0.94rem;}
+  .qr-wrap{
+    width:180px;
+    margin:20px auto;
+    padding:12px;
+    background:var(--ivory);
+    border-radius:6px;
+  }
+  .qr-wrap img{width:100%; display:block; border-radius:2px;}
+  .rsvp-link{
+    display:block;
+    margin-top:14px;
+    font-family:'Space Mono', monospace;
+    font-size:0.72rem;
+    color:var(--star-blue);
+    word-break:break-all;
+  }
+
+  /* ---------- sponsors ---------- */
+  .sponsor-cols{display:flex; gap:16px;}
+  .sponsor-col{flex:1;}
+  .sponsor-col .tag{
+    text-align:center;
+    font-family:'Space Mono', monospace;
+    font-size:0.66rem;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--blush);
+    margin-bottom:14px;
+  }
+  .sponsor-col ul{list-style:none; margin:0; padding:0;}
+  .sponsor-col li{
+    text-align:center;
+    padding:10px 4px;
+    border-top:1px solid var(--card-line);
+    font-size:0.88rem;
+    color:var(--ivory);
+  }
+  .sponsor-col li:last-child{border-bottom:1px solid var(--card-line);}
+
+  /* ---------- contacts ---------- */
+  .contact-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    padding:14px 0;
+    border-top:1px solid var(--card-line);
+  }
+  .contact-row:last-child{border-bottom:1px solid var(--card-line);}
+  .contact-row .who{font-size:0.92rem; color:var(--ivory);}
+  .contact-row .num{font-family:'Space Mono', monospace; font-size:0.8rem; color:var(--star-blue);}
+
+  /* ---------- FAQ ---------- */
+  .faq-item{border-top:1px solid var(--card-line);}
+  .faq-item:last-child{border-bottom:1px solid var(--card-line);}
+  .faq-item summary{
+    list-style:none;
+    cursor:pointer;
+    padding:16px 4px;
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+    font-family:'Fraunces', serif;
+    font-size:1rem;
+    color:var(--ivory);
+  }
+  .faq-item summary::-webkit-details-marker{display:none;}
+  .faq-item summary .plus{color:var(--gold); font-family:'Space Mono', monospace;}
+  .faq-item .faq-a{padding:0 4px 16px; color:var(--ivory-dim); font-size:0.9rem;}
+
+  /* ---------- milestones (constellation timeline) ---------- */
+  .timeline{position:relative; padding-left:34px;}
+  .timeline::before{
+    content:'';
+    position:absolute;
+    left:9px; top:6px; bottom:6px;
+    width:1px;
+    background:linear-gradient(var(--gold), rgba(244,200,106,0.15));
+  }
+  .tl-item{position:relative; margin-bottom:14px;}
+  .tl-item::before{
+    content:'';
+    position:absolute;
+    left:-34px; top:14px;
+    width:9px; height:9px;
+    border-radius:50%;
+    background:var(--gold);
+    box-shadow:0 0 8px 2px rgba(244,200,106,0.55);
+  }
+  .tl-item details{border:1px solid var(--card-line); background:rgba(244,200,106,0.03); border-radius:3px;}
+  .tl-item summary{
+    list-style:none; cursor:pointer;
+    padding:13px 16px;
+    display:flex; align-items:baseline; justify-content:space-between; gap:10px;
+  }
+  .tl-item summary::-webkit-details-marker{display:none;}
+  .tl-age{font-family:'Space Mono', monospace; font-size:0.68rem; letter-spacing:0.08em; color:var(--star-blue); white-space:nowrap;}
+  .tl-cap{font-family:'Fraunces', serif; font-style:italic; font-size:1rem; color:var(--ivory); text-align:right; flex:1;}
+  .tl-plus{font-family:'Space Mono', monospace; color:var(--gold); font-size:1rem;}
+  .tl-body{padding:0 16px 16px; color:var(--ivory-dim); font-size:0.88rem;}
+  .photo-slot{width:100%; height:150px; border:1px dashed var(--card-line); border-radius:3px; overflow:hidden; margin-bottom:10px;}
+  .photo-slot img{width:100%; height:100%; object-fit:cover; display:block;}
+
+  /* ---------- closing screen ---------- */
+  .closing{
+    position:relative;
+    min-height:100svh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:60px 24px;
+    overflow:hidden;
+  }
+  .closing-bg{
+    position:absolute;
+    inset:0;
+    z-index:0;
+  }
+  .closing-bg img{width:100%; height:100%; object-fit:cover; display:block; opacity:0.55;}
+  .closing-bg::after{
+    content:'';
+    position:absolute;
+    inset:0;
+    background:linear-gradient(180deg, rgba(6,11,30,0.55) 0%, rgba(6,11,30,0.85) 100%);
+  }
+  .closing-content{position:relative; z-index:1;}
+  .closing-content .eyebrow{color:var(--gold);}
+  .closing-content h2{
+    font-family:'Fraunces', serif;
+    font-style:italic;
+    font-size:1.8rem;
+    color:var(--ivory);
+    max-width:340px;
+    margin:0 auto 18px;
+    line-height:1.3;
+  }
+  .closing-content .cdate{
+    font-family:'Space Mono', monospace;
+    letter-spacing:0.14em;
+    color:var(--blush);
+    font-size:0.85rem;
+  }
+
+  footer{text-align:center; padding:40px 24px 50px; color:var(--ivory-dim); font-size:0.8rem; position:relative; z-index:1;}
+  footer .fname{font-family:'Fraunces', serif; font-style:italic; color:var(--gold); font-size:1.1rem; display:block; margin-bottom:6px;}
+
+  @media (min-width:600px){
+    .hero-name{font-size:3.6rem;}
+    .meaning-grid{flex-direction:row;}
+  }
+</style>
+</head>
+<body>
+
+<div id="starfield"></div>
+
+<!-- background music: replace src with your own audio file, e.g. audio/lullaby.mp3 -->
+<audio id="bgm" loop preload="none">
+  <source src="audio/lullaby.mp3" type="audio/mpeg">
+</audio>
+<button class="music-fab" id="musicFab" aria-label="Toggle music">♪</button>
+
+<div class="wrap">
+
+  <!-- ================= HERO ================= -->
+  <section class="hero">
+    <svg class="crown-svg" viewBox="0 0 120 60" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <circle cx="60" cy="10" r="3" fill="#F4C86A"/>
+      <circle cx="30" cy="26" r="2" fill="#F4C86A"/>
+      <circle cx="90" cy="26" r="2" fill="#F4C86A"/>
+      <circle cx="10" cy="44" r="1.6" fill="#9FC2FF"/>
+      <circle cx="110" cy="44" r="1.6" fill="#9FC2FF"/>
+      <path d="M10 44 L30 26 L60 10 L90 26 L110 44" stroke="#F4C86A" stroke-width="0.75" opacity="0.6"/>
+    </svg>
+
+    <!-- CELEBRANT PHOTO: replace the image src below with Starr's actual photo -->
+    <div class="celebrant-frame">
+      <div class="inner">
+        <img src="https://placehold.co/372x372/16234C/F4C86A?text=Starr%27s+Photo" alt="Starr Azrielle">
+      </div>
+    </div>
+
+    <p class="eyebrow">a little star's big day</p>
+    <h1 class="hero-name">Starr Azrielle</h1>
+    <svg class="name-swash" viewBox="0 0 200 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M4 12 C 40 2, 70 20, 100 10 S 160 2, 196 12" stroke="#D9B26B" stroke-width="1" fill="none" opacity="0.8"/>
+      <circle cx="100" cy="10.5" r="1.8" fill="#F4C86A"/>
+    </svg>
+    <p class="hero-occasion">Christening <span>&amp;</span> First Birthday</p>
+
+    <button class="music-pill" id="musicPill">♪ Tap to play music</button>
+
+    <div class="hero-datestrip">
+      <div class="date-badge">
+        <span class="seal-star">✦</span>
+        <span class="d">AUGUST 23<br>2026</span>
+        <span class="t">10:00 AM</span>
+      </div>
+      <div class="countdown" id="countdown">
+        <div class="count-box"><div class="num" id="cd-days">--</div><div class="lbl">Days</div></div>
+        <div class="count-box"><div class="num" id="cd-hours">--</div><div class="lbl">Hrs</div></div>
+        <div class="count-box"><div class="num" id="cd-mins">--</div><div class="lbl">Min</div></div>
+        <div class="count-box"><div class="num" id="cd-secs">--</div><div class="lbl">Sec</div></div>
+      </div>
+    </div>
+
+    <div class="scroll-cue"><span class="line"></span>scroll to explore the night</div>
+  </section>
+
+  <!-- ================= NAME MEANING ================= -->
+  <section class="section reveal">
+    <p class="eyebrow">her name, her story</p>
+    <p class="section-sub" style="margin-bottom:26px;">Every name in our family carries a little piece of the sky.</p>
+
+    <div class="meaning-grid">
+      <div class="meaning-card ornate">
+        <p class="word">Starr</p>
+        <p class="def">From "Star" — a light that guides, and one that shines uniquely on its own.</p>
+      </div>
+      <div class="meaning-card ornate">
+        <p class="word">Azrielle</p>
+        <p class="def">From the Hebrew "Azriel" — meaning "God is my help."</p>
+      </div>
+    </div>
+
+    <p class="sky-note">Two years ago, we welcomed her big sister, <span class="name-tag">Sky</span>. When our second daughter arrived, the name felt like it had already been written for her — <em>Starr</em>, to shine alongside the <em>Sky</em> that came before her. Together, they are the sky and the light within it.</p>
+  </section>
+
+  <div class="divider" aria-hidden="true">
+    <span class="stem l"></span>
+    <svg viewBox="0 0 60 20" xmlns="http://www.w3.org/2000/svg" style="width:52px;height:18px;flex:none;">
+      <path d="M2 10 Q 15 2, 30 10 T 58 10" stroke="#F4C86A" stroke-width="0.9" fill="none" opacity="0.85"/>
+      <circle cx="30" cy="10" r="2.4" fill="#F4C86A"/>
+      <circle cx="30" cy="10" r="4.6" stroke="#E8A9B8" stroke-width="0.6" fill="none" opacity="0.7"/>
+    </svg>
+    <span class="stem r"></span>
+  </div>
+
+  <!-- ================= CALENDAR ================= -->
+  <section class="section reveal">
+    <p class="eyebrow">mark your calendar</p>
+    <div class="calendar-card ornate">
+      <p class="calendar-head">August 2026</p>
+      <div class="cal-grid">
+        <div class="cal-dow">S</div><div class="cal-dow">M</div><div class="cal-dow">T</div><div class="cal-dow">W</div><div class="cal-dow">T</div><div class="cal-dow">F</div><div class="cal-dow">S</div>
+        <div class="cal-day empty"></div><div class="cal-day empty"></div><div class="cal-day empty"></div><div class="cal-day empty"></div><div class="cal-day empty"></div><div class="cal-day empty"></div><div class="cal-day">1</div>
+        <div class="cal-day">2</div><div class="cal-day">3</div><div class="cal-day">4</div><div class="cal-day">5</div><div class="cal-day">6</div><div class="cal-day">7</div><div class="cal-day">8</div>
+        <div class="cal-day">9</div><div class="cal-day">10</div><div class="cal-day">11</div><div class="cal-day">12</div><div class="cal-day">13</div><div class="cal-day">14</div><div class="cal-day">15</div>
+        <div class="cal-day">16</div><div class="cal-day">17</div><div class="cal-day">18</div><div class="cal-day">19</div><div class="cal-day">20</div><div class="cal-day">21</div><div class="cal-day">22</div>
+        <div class="cal-day marked">23</div><div class="cal-day">24</div><div class="cal-day">25</div><div class="cal-day">26</div><div class="cal-day">27</div><div class="cal-day">28</div><div class="cal-day">29</div>
+        <div class="cal-day">30</div><div class="cal-day">31</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider" aria-hidden="true">
+    <span class="stem l"></span>
+    <svg viewBox="0 0 60 20" xmlns="http://www.w3.org/2000/svg" style="width:52px;height:18px;flex:none;">
+      <path d="M2 10 Q 15 2, 30 10 T 58 10" stroke="#F4C86A" stroke-width="0.9" fill="none" opacity="0.85"/>
+      <circle cx="30" cy="10" r="2.4" fill="#F4C86A"/>
+      <circle cx="30" cy="10" r="4.6" stroke="#E8A9B8" stroke-width="0.6" fill="none" opacity="0.7"/>
+    </svg>
+    <span class="stem r"></span>
+  </div>
+
+  <!-- ================= FAMILY SLIDER ================= -->
+  <section class="section reveal">
+    <p class="eyebrow">our little family</p>
+    <p class="section-sub">Replace these with your own family photos — just swap each image's src.</p>
+    <div class="slider" id="familySlider">
+      <div class="slider-track" id="sliderTrack">
+        <img src="https://placehold.co/600x450/16234C/F4C86A?text=Family+Photo+1" alt="Family photo 1">
+        <img src="https://placehold.co/600x450/0F1B3D/9FC2FF?text=Family+Photo+2" alt="Family photo 2">
+        <img src="https://placehold.co/600x450/16234C/E8A9B8?text=Family+Photo+3" alt="Family photo 3">
+      </div>
+    </div>
+    <div class="slider-dots" id="sliderDots">
+      <span class="active"></span><span></span><span></span>
+    </div>
+  </section>
+
+  <div class="divider" aria-hidden="true">
+    <span class="stem l"></span>
+    <svg viewBox="0 0 60 20" xmlns="http://www.w3.org/2000/svg" style="width:52px;height:18px;flex:none;">
+      <path d="M2 10 Q 15 2, 30 10 T 58 10" stroke="#F4C86A" stroke-width="0.9" fill="none" opacity="0.85"/>
+      <circle cx="30" cy="10" r="2.4" fill="#F4C86A"/>
+      <circle cx="30" cy="10" r="4.6" stroke="#E8A9B8" stroke-width="0.6" fill="none" opacity="0.7"/>
+    </svg>
+    <span class="stem r"></span>
+  </div>
+
+  <!-- ================= DRESS CODE ================= -->
+  <section class="section reveal">
+    <p class="eyebrow">dress code</p>
+    <p class="section-sub" style="margin-bottom:0;">Any touch of white or royal blue — wear whatever makes you feel like you belong under the same night sky.</p>
+    <div class="dress-row">
+      <div class="swatch"><div class="dot white"></div><p class="lbl">White</p></div>
+      <div class="swatch"><div class="dot royal"></div><p class="lbl">Royal Blue</p></div>
+    </div>
+  </section>
+
+  <div class="divider" aria-hidden="true">
+    <span class="stem l"></span>
+    <svg viewBox="0 0 60 20" xmlns="http://www.w3.org/2000/svg" style="width:52px;height:18px;flex:none;">
+      <path d="M2 10 Q 15 2, 30 10 T 58 10" stroke="#F4C86A" stroke-width="0.9" fill="none" opacity="0.85"/>
+      <circle cx="30" cy="10" r="2.4" fill="#F4C86A"/>
+      <circle cx="30" cy="10" r="4.6" stroke="#E8A9B8" stroke-width="0.6" fill="none" opacity="0.7"/>
+    </svg>
+    <span class="stem r"></span>
+  </div>
+
+  <!-- ================= EVENTS / VENUES ================= -->
+  <section class="section reveal" id="events">
+    <p class="eyebrow">where to find us</p>
+
+    <div class="card ornate">
+      <img class="venue-photo" src="https://placehold.co/600x340/0F1B3D/F4C86A?text=St.+Vincent+Ferrer+Parish+Church" alt="St. Vincent Ferrer Parish Church">
+      <div class="card-body">
+        <p class="card-kicker"><svg width="16" height="16" viewBox="0 0 24 24" style="vertical-align:-3px; margin-right:6px;" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M2 13c3-1 5-3 6-6 1 4 4 6 8 6-2 3-6 5-9 4-2 3-4 4-5 3 1-2 1-4 0-7z" fill="#E8A9B8" opacity="0.85"/></svg>The Baptism</p>
+        <h3>St. Vincent Ferrer Parish Church</h3>
+        <p class="addr">Poblacion District II, San Vicente, Camarines Norte<br>Diocese of Daet</p>
+        <p class="when">Aug 23, 2026 &nbsp;·&nbsp; 10:00 AM</p>
+        <iframe class="map-frame" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+          src="https://www.google.com/maps?q=St.+Vincent+Ferrer+Parish+Church%2C+Poblacion+District+II%2C+San+Vicente%2C+Camarines+Norte&output=embed"></iframe>
+        <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=St.%20Vincent%20Ferrer%20Parish%20Church%2C%20Poblacion%20District%20II%2C%20San%20Vicente%2C%20Camarines%20Norte">Get Directions</a>
+      </div>
+    </div>
+
+    <div class="card ornate">
+      <img class="venue-photo" src="https://placehold.co/600x340/0F1B3D/9FC2FF?text=Tindahan+ni+Kuya" alt="Tindahan ni Kuya reception venue">
+      <div class="card-body">
+        <p class="card-kicker">The Celebration</p>
+        <h3>Tindahan ni Kuya</h3>
+        <p class="addr">San Vicente Road, Purok-2, Barangay Fabrica<br>San Vicente, 4609 Camarines Norte</p>
+        <p class="when">Reception follows right after the Baptismal Mass</p>
+        <iframe class="map-frame" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+          src="https://www.google.com/maps?q=Tindahan+ni+Kuya%2C+San+Vicente+Road%2C+Purok-2%2C+San+Vicente%2C+4609+Camarines+Norte&output=embed"></iframe>
+        <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=Tindahan%20ni%20Kuya%2C%20San%20Vicente%20Road%2C%20Purok-2%2C%20San%20Vicente%2C%204609%20Camarines%20Norte">Get Directions</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider" aria-hidden="true">
+    <span class="stem l"></span>
+    <svg viewBox="0 0 60 20" xmlns="http://www.w3.org/2000/svg" style="width:52px;height:18px;flex:none;">
+      <path d="M2 10 Q 15 2, 30 10 T 58 10" stroke="#F4C86A" stroke-width="0.9" fill="none" opacity="0.85"/>
+      <circle cx="30" cy="10" r="2.4" fill="#F4C86A"/>
+      <circle cx="30" cy="10" r="4.6" stroke="#E8A9B8" stroke-width="0.6" fill="none" opacity="0.7"/>
+    </svg>
+    <span class="stem r"></span>
+  </div>
+
+  <!-- ================= SAVE THE DATE ================= -->
+  <section class="section reveal">
+    <div class="card ornate std-card">
+      <p class="eyebrow" style="margin-bottom:6px;">save the date</p>
+      <p class="big-date">August 23, 2026</p>
+      <p class="sub">10:00 AM &nbsp;·&nbsp; San Vicente, Camarines Norte</p>
+      <button class="btn btn-outline" id="addToCal">+ Add to Calendar</button>
+    </div>
+  </section>
+
+  <!-- ================= RSVP ================= -->
+  <section class="section reveal">
+    <div class="rsvp-box ornate">
+      <p class="eyebrow" style="margin-bottom:10px;">kindly respond</p>
+      <h3 style="color:var(--ivory); font-size:1.2rem; margin-bottom:10px;">We'd love to know you're coming</h3>
+      <p>Scan the code below to fill out our RSVP form, or use the link under it.</p>
+      <!-- QR code: replace RSVP-LINK-HERE with your real RSVP form link (a free Google Form works great) -->
+      <div class="qr-wrap">
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=REPLACE-WITH-YOUR-RSVP-LINK" alt="RSVP QR code">
+      </div>
+      <span class="rsvp-link">REPLACE-WITH-YOUR-RSVP-LINK</span>
+      <p style="margin-top:14px;">Kindly respond on or before [RSVP Date].</p>
+    </div>
+  </section>
+
+  <div class="divider" aria-hidden="true">
+    <span class="stem l"></span>
+    <svg viewBox="0 0 60 20" xmlns="http://www.w3.org/2000/svg" style="width:52px;height:18px;flex:none;">
+      <path d="M2 10 Q 15 2, 30 10 T 58 10" stroke="#F4C86A" stroke-width="0.9" fill="none" opacity="0.85"/>
+      <circle cx="30" cy="10" r="2.4" fill="#F4C86A"/>
+      <circle cx="30" cy="10" r="4.6" stroke="#E8A9B8" stroke-width="0.6" fill="none" opacity="0.7"/>
+    </svg>
+    <span class="stem r"></span>
+  </div>
+
+  <!-- ================= PEOPLE ================= -->
+  <section class="section reveal">
+    <p class="eyebrow">with love &amp; gratitude</p>
+    <div style="text-align:center; margin-bottom:40px;">
+      <p style="font-family:'Space Mono', monospace; font-size:0.65rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--ivory-dim); margin-bottom:10px;">Proud Parents</p>
+      <p style="font-family:'Fraunces', serif; font-style:italic; font-size:1.4rem; color:var(--gold);">[Father's Name] &amp; [Mother's Name]</p>
+    </div>
+
+    <div class="sponsor-cols">
+      <div class="sponsor-col">
+        <p class="tag">Ninong</p>
+        <ul>
+          <li>[Name]</li>
+          <li>[Name]</li>
+          <li>[Name]</li>
+        </ul>
+      </div>
+      <div class="sponsor-col">
+        <p class="tag">Ninang</p>
+        <ul>
+          <li>[Name]</li>
+          <li>[Name]</li>
+          <li>[Name]</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider" aria-hidden="true">
+    <span class="stem l"></span>
+    <svg viewBox="0 0 60 20" xmlns="http://www.w3.org/2000/svg" style="width:52px;height:18px;flex:none;">
+      <path d="M2 10 Q 15 2, 30 10 T 58 10" stroke="#F4C86A" stroke-width="0.9" fill="none" opacity="0.85"/>
+      <circle cx="30" cy="10" r="2.4" fill="#F4C86A"/>
+      <circle cx="30" cy="10" r="4.6" stroke="#E8A9B8" stroke-width="0.6" fill="none" opacity="0.7"/>
+    </svg>
+    <span class="stem r"></span>
+  </div>
+
+  <!-- ================= CONTACTS ================= -->
+  <section class="section reveal">
+    <p class="eyebrow">questions? reach us</p>
+    <div class="card ornate" style="padding:6px 22px 18px;">
+      <div class="contact-row"><span class="who">[Contact Name 1]</span><span class="num">[Phone / Messenger]</span></div>
+      <div class="contact-row"><span class="who">[Contact Name 2]</span><span class="num">[Phone / Messenger]</span></div>
+    </div>
+  </section>
+
+  <!-- ================= FAQ ================= -->
+  <section class="section reveal">
+    <p class="eyebrow">good to know</p>
+    <div class="faq-list">
+      <details class="faq-item">
+        <summary>Are kids welcome?<span class="plus">+</span></summary>
+        <p class="faq-a">Of course — this celebration is for the whole family, little ones included.</p>
+      </details>
+      <details class="faq-item">
+        <summary>What should I wear?<span class="plus">+</span></summary>
+        <p class="faq-a">Any touch of white or royal blue is most welcome. Comfortable and semi-formal is perfect.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Can I take photos during the Mass?<span class="plus">+</span></summary>
+        <p class="faq-a">Yes, just kindly keep flash photography to a minimum and be mindful during the sacrament.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Is parking available?<span class="plus">+</span></summary>
+        <p class="faq-a">[Add parking details for the church and reception venue here.]</p>
+      </details>
+      <details class="faq-item">
+        <summary>Do you have a gift preference?<span class="plus">+</span></summary>
+        <p class="faq-a">Your presence is truly the gift. [Add any specific note here if you'd like.]</p>
+      </details>
+    </div>
+  </section>
+
+  <!-- ================= MILESTONES ================= -->
+  <section class="section reveal">
+    <p class="eyebrow">starr's journey across the sky</p>
+    <p class="section-sub">Eleven months of little lights, from her very first day to her almost-first steps.</p>
+
+    <div class="timeline">
+      <div class="tl-item">
+        <details>
+          <summary><span class="tl-age">DAY 1</span><span class="tl-cap">Welcome to the World</span><span class="tl-plus">+</span></summary>
+          <div class="tl-body"><div class="photo-slot"><img src="https://placehold.co/400x300/16234C/F4C86A?text=Day+1" alt="Day 1"></div>Replace this with the story of the day she arrived.</div>
+        </details>
+      </div>
+      <div class="tl-item">
+        <details>
+          <summary><span class="tl-age">MONTH 1</span><span class="tl-cap">First Smiles</span><span class="tl-plus">+</span></summary>
+          <div class="tl-body"><div class="photo-slot"><img src="https://placehold.co/400x300/16234C/F4C86A?text=Month+1" alt="Month 1"></div>Replace with a note about her first smile.</div>
+        </details>
+      </div>
+      <div class="tl-item">
+        <details>
+          <summary><span class="tl-age">MONTH 2</span><span class="tl-cap">Cooing Conversations</span><span class="tl-plus">+</span></summary>
+          <div class="tl-body"><div class="photo-slot"><img src="https://placehold.co/400x300/16234C/F4C86A?text=Month+2" alt="Month 2"></div>Replace with a note about this month.</div>
+        </details>
+      </div>
+      <div class="tl-item">
+        <details>
+          <summary><span class="tl-age">MONTH 3</span><span class="tl-cap">Rolling Over</span><span class="tl-plus">+</span></summary>
+          <div class="tl-body"><div class="photo-slot"><img src="https://placehold.co/400x300/16234C/F4C86A?text=Month+3" alt="Month 3"></div>Replace with a note about this month.</div>
+        </details>
+      </div>
+      <div class="tl-item">
+        <details>
+          <summary><span class="tl-age">MONTH 4</span><span class="tl-cap">Giggles Galore</span><span class="tl-plus">+</span></summary>
+          <div class="tl-body"><div class="photo-slot"><img src="https://placehold.co/400x300/16234C/F4C86A?text=Month+4" alt="Month 4"></div>Replace with a note about this month.</div>
+        </details>
+      </div>
+      <div class="tl-item">
+        <details>
+          <summary><span class="tl-age">MONTH 5</span><span class="tl-cap">Reaching &amp; Grabbing</span><span class="tl-plus">+</span></summary>
+          <div class="tl-body"><div class="photo-slot"><img src="https://placehold.co/400x300/16234C/F4C86A?text=Month+5" alt="Month 5"></div>Replace with a note about this month.</div>
+        </details>
+      </div>
+      <div class="tl-item">
+        <details>
+          <summary><span class="tl-age">MONTH 6</span><span class="tl-cap">First Taste of Food</span><span class="tl-plus">+</span></summary>
+          <div class="tl-body"><div class="photo-slot"><img src="https://placehold.co/400x300/16234C/F4C86A?text=Month+6" alt="Month 6"></div>Replace with a note about this month.</div>
+        </details>
+      </div>
+      <div class="tl-item">
+        <details>
+          <summary><span class="tl-age">MONTH 7</span><span class="tl-cap">Sitting Up Solo</span><span class="tl-plus">+</span></summary>
+          <div class="tl-body"><div class="photo-slot"><img src="https://placehold.co/400x300/16234C/F4C86A?text=Month+7" alt="Month 7"></div>Replace with a note about this month.</div>
+        </details>
+      </div>
+      <div class="tl-item">
+        <details>
+          <summary><span class="tl-age">MONTH 8</span><span class="tl-cap">Peekaboo Pro</span><span class="tl-plus">+</span></summary>
+          <div class="tl-body"><div class="photo-slot"><img src="https://placehold.co/400x300/16234C/F4C86A?text=Month+8" alt="Month 8"></div>Replace with a note about this month.</div>
+        </details>
+      </div>
+      <div class="tl-item">
+        <details>
+          <summary><span class="tl-age">MONTH 9</span><span class="tl-cap">Crawling Adventures</span><span class="tl-plus">+</span></summary>
+          <div class="tl-body"><div class="photo-slot"><img src="https://placehold.co/400x300/16234C/F4C86A?text=Month+9" alt="Month 9"></div>Replace with a note about this month.</div>
+        </details>
+      </div>
+      <div class="tl-item">
+        <details>
+          <summary><span class="tl-age">MONTH 10</span><span class="tl-cap">Cruising the Furniture</span><span class="tl-plus">+</span></summary>
+          <div class="tl-body"><div class="photo-slot"><img src="https://placehold.co/400x300/16234C/F4C86A?text=Month+10" alt="Month 10"></div>Replace with a note about this month.</div>
+        </details>
+      </div>
+      <div class="tl-item">
+        <details>
+          <summary><span class="tl-age">MONTH 11</span><span class="tl-cap">Almost Walking</span><span class="tl-plus">+</span></summary>
+          <div class="tl-body"><div class="photo-slot"><img src="https://placehold.co/400x300/16234C/F4C86A?text=Month+11" alt="Month 11"></div>Replace with a note about this month, right before her big day.</div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ================= CLOSING FULL SCREEN ================= -->
+<section class="closing full-bleed">
+  <div class="closing-bg">
+    <!-- CLOSING PHOTO: replace with a favorite photo of Starr -->
+    <img src="https://placehold.co/900x1400/0F1B3D/F4C86A?text=Starr" alt="Starr Azrielle">
+  </div>
+  <div class="closing-content">
+    <p class="eyebrow">until we meet under the stars</p>
+    <h2>We are waiting for you, dear family and loved ones.</h2>
+    <p class="cdate">AUGUST 23, 2026</p>
+  </div>
+</section>
+
+<footer>
+  <span class="fname">Starr Azrielle</span>
+  With love and thanks for celebrating this night with us.
+</footer>
+
+<script>
+  // ---------- starfield ----------
+  (function(){
+    var field = document.getElementById('starfield');
+    var count = window.innerWidth < 500 ? 70 : 110;
+    for(var i=0;i<count;i++){
+      var s = document.createElement('div');
+      s.className = 'star';
+      var size = (Math.random()*2 + 0.6).toFixed(1);
+      s.style.width = size+'px';
+      s.style.height = size+'px';
+      s.style.left = (Math.random()*100)+'%';
+      s.style.top = (Math.random()*100)+'%';
+      s.style.animationDuration = (Math.random()*3 + 2)+'s';
+      s.style.animationDelay = (Math.random()*4)+'s';
+      field.appendChild(s);
+    }
+    for(var j=0;j<3;j++){
+      var sh = document.createElement('div');
+      sh.className = 'shooting-star';
+      sh.style.top = (Math.random()*40)+'%';
+      sh.style.left = (50 + Math.random()*40)+'%';
+      sh.style.animationDelay = (j*7 + Math.random()*5)+'s';
+      field.appendChild(sh);
+    }
+  })();
+
+  // ---------- countdown ----------
+  (function(){
+    var target = new Date('2026-08-23T10:00:00+08:00').getTime();
+    function tick(){
+      var now = Date.now();
+      var diff = target - now;
+      if(diff < 0) diff = 0;
+      var d = Math.floor(diff / 86400000);
+      var h = Math.floor((diff % 86400000) / 3600000);
+      var m = Math.floor((diff % 3600000) / 60000);
+      var s = Math.floor((diff % 60000) / 1000);
+      document.getElementById('cd-days').textContent = d;
+      document.getElementById('cd-hours').textContent = String(h).padStart(2,'0');
+      document.getElementById('cd-mins').textContent = String(m).padStart(2,'0');
+      document.getElementById('cd-secs').textContent = String(s).padStart(2,'0');
+    }
+    tick();
+    setInterval(tick, 1000);
+  })();
+
+  // ---------- reveal on scroll ----------
+  (function(){
+    var els = document.querySelectorAll('.reveal');
+    var obs = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); }
+      });
+    }, {threshold:0.15});
+    els.forEach(function(el){ obs.observe(el); });
+  })();
+
+  // ---------- music toggle ----------
+  (function(){
+    var bgm = document.getElementById('bgm');
+    var pill = document.getElementById('musicPill');
+    var fab = document.getElementById('musicFab');
+    var playing = false;
+
+    function updateFab(){
+      fab.textContent = playing ? '♪' : '✕';
+    }
+    pill.addEventListener('click', function(){
+      bgm.play().catch(function(){ /* file not added yet, or autoplay blocked */ });
+      playing = true;
+      pill.style.display = 'none';
+      fab.classList.add('show');
+      updateFab();
+    });
+    fab.addEventListener('click', function(){
+      if(playing){ bgm.pause(); } else { bgm.play().catch(function(){}); }
+      playing = !playing;
+      updateFab();
+    });
+  })();
+
+  // ---------- family photo auto-slider ----------
+  (function(){
+    var track = document.getElementById('sliderTrack');
+    var dots = document.querySelectorAll('#sliderDots span');
+    var slides = track.children.length;
+    var idx = 0;
+    function go(i){
+      idx = i % slides;
+      track.style.transform = 'translateX(-' + (idx*100) + '%)';
+      dots.forEach(function(d, di){ d.classList.toggle('active', di===idx); });
+    }
+    setInterval(function(){ go(idx+1); }, 4000);
+  })();
+
+  // ---------- add to calendar (.ics) ----------
+  document.getElementById('addToCal').addEventListener('click', function(){
+    var ics = [
+      'BEGIN:VCALENDAR',
+      'VERSION:2.0',
+      'PRODID:-//Starr Azrielle//Christening//EN',
+      'BEGIN:VEVENT',
+      'UID:'+Date.now()+'@starrazrielle',
+      'DTSTAMP:20260101T000000Z',
+      'DTSTART:20260823T020000Z',
+      'DTEND:20260823T050000Z',
+      "SUMMARY:Starr Azrielle's Christening & First Birthday",
+      'DESCRIPTION:Baptism at St. Vincent Ferrer Parish Church\\, Poblacion District II\\, San Vicente\\, Camarines Norte. Reception follows at Tindahan ni Kuya\\, San Vicente Road\\, Purok-2\\, San Vicente\\, Camarines Norte.',
+      'LOCATION:St. Vincent Ferrer Parish Church\\, Poblacion District II\\, San Vicente\\, Camarines Norte',
+      'END:VEVENT',
+      'END:VCALENDAR'
+    ].join('\r\n');
+    var blob = new Blob([ics], {type:'text/calendar'});
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = 'Starr-Azrielle-Christening.ics';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  });
+</script>
+
+</body>
+</html>
