@@ -29,6 +29,7 @@
 
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
+  :focus-visible{outline:3px solid var(--star-blue); outline-offset:4px;}
   @media (prefers-reduced-motion: reduce){
     html{scroll-behavior:auto;}
     *{animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important;}
@@ -93,6 +94,21 @@
     position:relative;
     z-index:1;
   }
+  .skip-link{
+    position:fixed;
+    top:12px;
+    left:12px;
+    z-index:30;
+    padding:8px 12px;
+    color:var(--navy-deep);
+    background:var(--ivory);
+    border-radius:3px;
+    font-family:'Space Mono', monospace;
+    font-size:0.72rem;
+    transform:translateY(-150%);
+    transition:transform 0.2s ease;
+  }
+  .skip-link:focus{transform:translateY(0);}
 
   /* ---------- shared type ---------- */
   .eyebrow{
@@ -162,40 +178,49 @@
 
   /* ---------- hero ---------- */
   .hero{
+    position:relative;
+    isolation:isolate;
+    width:100vw;
+    min-height:100vh;
     min-height:100svh;
+    margin-left:calc(50% - 50vw);
     display:flex;
     flex-direction:column;
     align-items:center;
     justify-content:center;
     text-align:center;
-    padding:56px 24px 40px;
+    padding:72px 24px 44px;
+    overflow:hidden;
   }
-  .crown-svg{width:90px; height:auto; margin-bottom:12px;}
-  .hero .eyebrow{margin-bottom:16px;}
-
-  .celebrant-frame{
-    width:186px;
-    height:186px;
-    border-radius:50%;
-    padding:5px;
-    background:conic-gradient(from 0deg, var(--gold), var(--star-blue), var(--blush), var(--gold));
-    margin-bottom:20px;
-    box-shadow:0 0 34px rgba(244,200,106,0.28);
+  .hero-background,
+  .hero-background img,
+  .hero::after{
+    position:absolute;
+    inset:0;
   }
-  .celebrant-frame .inner{
+  .hero-background{z-index:-2; background:var(--navy-mid);}
+  .hero-background img{
     width:100%;
     height:100%;
-    border-radius:50%;
-    overflow:hidden;
-    background:var(--navy-mid);
-    display:flex;
-    align-items:center;
-    justify-content:center;
+    object-fit:cover;
+    object-position:center;
+    display:block;
   }
-  .celebrant-frame img{width:100%; height:100%; object-fit:cover; display:block;}
+  .hero::after{
+    content:'';
+    z-index:-1;
+    background:linear-gradient(180deg, rgba(6,11,30,0.28) 0%, rgba(6,11,30,0.46) 38%, rgba(6,11,30,0.9) 100%);
+  }
+  .hero > :not(.hero-background){
+    position:relative;
+    z-index:1;
+    max-width:560px;
+  }
+  .crown-svg{width:90px; height:auto; margin-bottom:14px; filter:drop-shadow(0 2px 10px rgba(6,11,30,0.75));}
+  .hero .eyebrow{margin-bottom:16px;}
 
   .hero-name{
-    font-size:2.9rem;
+    font-size:clamp(3rem, 12vw, 5rem);
     font-style:italic;
     font-weight:600;
     line-height:1.08;
@@ -204,6 +229,7 @@
     background-clip:text;
     color:transparent;
     letter-spacing:0.01em;
+    text-shadow:0 4px 24px rgba(6,11,30,0.52);
   }
   .name-swash{width:140px; height:auto; margin-top:6px;}
   .hero-occasion{
@@ -255,7 +281,7 @@
 
   /* wax-seal date badge + countdown, merged in hero */
   .hero-datestrip{
-    margin-top:28px;
+    margin-top:24px;
     display:flex;
     flex-direction:column;
     align-items:center;
@@ -271,7 +297,7 @@
     align-items:center;
     justify-content:center;
     gap:2px;
-    background:radial-gradient(circle at 50% 40%, rgba(244,200,106,0.10), rgba(244,200,106,0.02) 70%);
+    background:radial-gradient(circle at 50% 40%, rgba(244,200,106,0.16), rgba(6,11,30,0.28) 70%);
     border:1px solid var(--gold-soft);
     box-shadow:inset 0 0 0 4px rgba(6,11,30,0.6), inset 0 0 0 5px rgba(244,200,106,0.35);
   }
@@ -398,21 +424,43 @@
     display:flex;
     height:100%;
     transition:transform 0.6s ease;
+    will-change:transform;
   }
   .slider-track img{width:100%; height:100%; object-fit:cover; flex:none;}
+  .slider-control{
+    position:absolute;
+    top:50%;
+    z-index:2;
+    width:42px;
+    height:42px;
+    border:1px solid var(--card-line);
+    border-radius:50%;
+    color:var(--ivory);
+    background:rgba(6,11,30,0.62);
+    font-size:1.45rem;
+    line-height:1;
+    cursor:pointer;
+    transform:translateY(-50%);
+  }
+  .slider-control:hover{background:var(--navy-mid);}
+  .slider-control.prev{left:12px;}
+  .slider-control.next{right:12px;}
   .slider-dots{
     display:flex;
     justify-content:center;
     gap:7px;
     margin-top:14px;
   }
-  .slider-dots span{
+  .slider-dots button{
     width:6px; height:6px;
+    padding:0;
+    border:0;
     border-radius:50%;
     background:var(--card-line);
     transition:background 0.3s ease;
+    cursor:pointer;
   }
-  .slider-dots span.active{background:var(--gold);}
+  .slider-dots button.active{background:var(--gold);}
 
   /* ---------- dress code ---------- */
   .dress-row{
@@ -574,38 +622,67 @@
   .faq-item summary .plus{color:var(--gold); font-family:'Space Mono', monospace;}
   .faq-item .faq-a{padding:0 4px 16px; color:var(--ivory-dim); font-size:0.9rem;}
 
-  /* ---------- milestones (constellation timeline) ---------- */
-  .timeline{position:relative; padding-left:34px;}
-  .timeline::before{
-    content:'';
-    position:absolute;
-    left:9px; top:6px; bottom:6px;
-    width:1px;
-    background:linear-gradient(var(--gold), rgba(244,200,106,0.15));
+  /* ---------- milestones (continuous memory album) ---------- */
+  .memory-album{margin:0 -24px; overflow:hidden;}
+  .memory-track{
+    display:flex;
+    gap:14px;
+    overflow-x:auto;
+    padding:4px 24px 16px;
+    scroll-snap-type:x mandatory;
+    scrollbar-width:none;
+    cursor:grab;
+    touch-action:pan-y;
   }
-  .tl-item{position:relative; margin-bottom:14px;}
-  .tl-item::before{
+  .memory-track::-webkit-scrollbar{display:none;}
+  .memory-track.is-dragging{cursor:grabbing; scroll-snap-type:none;}
+  .memory-slide{
+    position:relative;
+    flex:0 0 min(76vw, 320px);
+    aspect-ratio:3/4;
+    overflow:hidden;
+    scroll-snap-align:center;
+    border:1px solid var(--card-line);
+    border-radius:6px;
+    background:var(--navy-glow);
+    box-shadow:0 14px 35px rgba(0,0,0,0.25);
+  }
+  .memory-slide img{width:100%; height:100%; object-fit:cover; display:block;}
+  .memory-slide::after{
     content:'';
     position:absolute;
-    left:-34px; top:14px;
-    width:9px; height:9px;
+    inset:45% 0 0;
+    background:linear-gradient(transparent, rgba(6,11,30,0.8));
+    pointer-events:none;
+  }
+  .memory-slide-label{
+    position:absolute;
+    z-index:1;
+    left:16px;
+    right:16px;
+    bottom:14px;
+    font-family:'Space Mono', monospace;
+    font-size:0.62rem;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--ivory);
+  }
+  .memory-controls{display:flex; align-items:center; justify-content:center; gap:16px; margin-top:6px;}
+  .memory-progress{width:106px; height:1px; background:var(--card-line); overflow:hidden;}
+  .memory-progress span{display:block; width:2%; height:100%; background:var(--gold); transition:width 0.35s ease;}
+  .memory-count{font-family:'Space Mono', monospace; font-size:0.66rem; letter-spacing:0.12em; color:var(--ivory-dim); min-width:72px; text-align:center;}
+  .memory-button{
+    width:40px;
+    height:40px;
+    border:1px solid var(--card-line);
     border-radius:50%;
-    background:var(--gold);
-    box-shadow:0 0 8px 2px rgba(244,200,106,0.55);
+    color:var(--gold);
+    background:rgba(244,200,106,0.07);
+    font-size:1.4rem;
+    line-height:1;
+    cursor:pointer;
   }
-  .tl-item details{border:1px solid var(--card-line); background:rgba(244,200,106,0.03); border-radius:3px;}
-  .tl-item summary{
-    list-style:none; cursor:pointer;
-    padding:13px 16px;
-    display:flex; align-items:baseline; justify-content:space-between; gap:10px;
-  }
-  .tl-item summary::-webkit-details-marker{display:none;}
-  .tl-age{font-family:'Space Mono', monospace; font-size:0.68rem; letter-spacing:0.08em; color:var(--star-blue); white-space:nowrap;}
-  .tl-cap{font-family:'Fraunces', serif; font-style:italic; font-size:1rem; color:var(--ivory); text-align:right; flex:1;}
-  .tl-plus{font-family:'Space Mono', monospace; color:var(--gold); font-size:1rem;}
-  .tl-body{padding:0 16px 16px; color:var(--ivory-dim); font-size:0.88rem;}
-  .photo-slot{width:100%; height:150px; border:1px dashed var(--card-line); border-radius:3px; overflow:hidden; margin-bottom:10px;}
-  .photo-slot img{width:100%; height:100%; object-fit:cover; display:block;}
+  .memory-button:hover{background:rgba(244,200,106,0.15);}
 
   /* ---------- closing screen ---------- */
   .closing{
@@ -653,7 +730,6 @@
   footer .fname{font-family:'Fraunces', serif; font-style:italic; color:var(--gold); font-size:1.1rem; display:block; margin-bottom:6px;}
 
   @media (min-width:600px){
-    .hero-name{font-size:3.6rem;}
     .meaning-grid{flex-direction:row;}
   }
 </style>
@@ -661,17 +737,20 @@
 <body>
 
 <div id="starfield"></div>
+<a class="skip-link" href="#main-content">Skip to invitation details</a>
 
 <!-- background music: replace src with your own audio file, e.g. audio/lullaby.mp3 -->
 <audio id="bgm" loop preload="none">
   <source src="audio/twinkle.mp3" type="audio/mp3">
 </audio>
-<button class="music-fab" id="musicFab" aria-label="Toggle music">♪</button>
+<button class="music-fab" id="musicFab" type="button" aria-label="Pause background music" aria-pressed="true">♪</button>
 
-<div class="wrap">
+<main class="wrap" id="main-content">
 
   <!-- ================= HERO ================= -->
   <section class="hero">
+    <!-- Replace this image with Tala's preferred full-screen portrait when ready. -->
+    <div class="hero-background" aria-hidden="true"><img src="images/tala.png" alt=""></div>
     <svg class="crown-svg" viewBox="0 0 120 60" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
       <circle cx="60" cy="10" r="3" fill="#F4C86A"/>
       <circle cx="30" cy="26" r="2" fill="#F4C86A"/>
@@ -681,13 +760,6 @@
       <path d="M10 44 L30 26 L60 10 L90 26 L110 44" stroke="#F4C86A" stroke-width="0.75" opacity="0.6"/>
     </svg>
 
-    <!-- CELEBRANT PHOTO: replace the image src below with Starr's actual photo -->
-    <div class="celebrant-frame">
-      <div class="inner">
-        <img src="images/tala.png" alt="Starr Azrielle">
-      </div>
-    </div>
-
     <p class="eyebrow">a little star's big day</p>
     <h1 class="hero-name">Starr Azrielle (Tala)</h1>
     <svg class="name-swash" viewBox="0 0 200 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -696,7 +768,7 @@
     </svg>
     <p class="hero-occasion">Christening <span>&amp;</span> First Birthday</p>
 
-    <button class="music-pill" id="musicPill">♪ Tap to play music</button>
+    <button class="music-pill" id="musicPill" type="button">♪ Tap to play music</button>
 
     <div class="hero-datestrip">
       <div class="date-badge">
@@ -712,7 +784,7 @@
       </div>
     </div>
 
-    <div class="scroll-cue"><span class="line"></span>scroll to explore the night</div>
+    <div class="scroll-cue"><span class="line"></span>scroll to explore the celebration</div>
   </section>
 
   <!-- ================= NAME MEANING ================= -->
@@ -728,7 +800,7 @@
         <p class="def">From the Hebrew "Azriel" — meaning "God is my help."</p>
       </div>
     </div>
-<p class="section-sub" style="margin-bottom:26px;">Together, Starr Azrielle represents a radiant light whose life is guided by God's grace and whose presence inspires hope, love, and joy to those around her..</p>
+    <p class="section-sub" style="margin-bottom:26px;">Together, Starr Azrielle represents a radiant light whose life is guided by God's grace and whose presence inspires hope, love, and joy to those around her.</p>
 
     <p class="sky-note">Two years ago, we welcomed her big sister, <span class="name-tag">Sky</span>. When our second daughter arrived, the name felt like it had already been written for her — <em>Starr</em>, to shine alongside the <em>Sky</em> that came before her. Together, they are the sky and the light within it.</p>
   </section>
@@ -774,17 +846,21 @@
   <section class="section reveal">
     <p class="eyebrow">our little family</p>
     <p class="section-sub">Meet Tala's humble and loving family—a happy household blessed with one son and two daughters. Their youngest, Tala, fills their home with laughter and joy, bringing smiles to everyone around her. Together, they cherish life's simple moments, supporting one another with love, kindness, and gratitude.</p>
-    <div class="slider" id="familySlider">
+    <div class="slider" id="familySlider" role="region" aria-roledescription="carousel" aria-label="Family photos" tabindex="0">
       <div class="slider-track" id="sliderTrack">
         <img src="images/1.jpg" alt="Family photo 1">
         <img src="images/2.jpg" alt="Family photo 2">
         <img src="images/3.jpg" alt="Family photo 3">
         <img src="images/4.jpg" alt="Family photo 4">
-        <img src="images/4.jpg" alt="Family photo 5">
       </div>
+      <button class="slider-control prev" id="sliderPrev" type="button" aria-label="Show previous family photo">‹</button>
+      <button class="slider-control next" id="sliderNext" type="button" aria-label="Show next family photo">›</button>
     </div>
     <div class="slider-dots" id="sliderDots">
-      <span class="active"></span><span></span><span></span><span></span><span></span>
+      <button class="active" type="button" aria-label="Show family photo 1" aria-current="true"></button>
+      <button type="button" aria-label="Show family photo 2" aria-current="false"></button>
+      <button type="button" aria-label="Show family photo 3" aria-current="false"></button>
+      <button type="button" aria-label="Show family photo 4" aria-current="false"></button>
     </div>
   </section>
 
@@ -865,7 +941,7 @@
       <p class="eyebrow" style="margin-bottom:6px;">save the date</p>
       <p class="big-date">August 23, 2026</p>
       <p class="sub">10:00 AM &nbsp;·&nbsp; San Vicente, Camarines Norte</p>
-      <button class="btn btn-outline" id="addToCal">+ Add to Calendar</button>
+      <button class="btn btn-outline" id="addToCal" type="button">+ Add to Calendar</button>
     </div>
   </section>
 
@@ -879,9 +955,7 @@
       <div class="qr-wrap">
         <img src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=https://forms.gle/PTyLWBJSxRtf23wr6" alt="RSVP QR code">
       </div>
-      <a href="https://forms.gle/PTyLWBJSxRtf23wr6" target="_blank">
-    <span class="rsvp-link">https://forms.gle/PTyLWBJSxRtf23wr6</span>
-</a>
+      <a class="rsvp-link" href="https://forms.gle/PTyLWBJSxRtf23wr6" target="_blank" rel="noopener">https://forms.gle/PTyLWBJSxRtf23wr6</a>
       <p style="margin-top:14px;">Kindly respond on or before August 15, 2026.</p>
     </div>
   </section>
@@ -971,87 +1045,28 @@
   </section>
 
   <!-- ================= MILESTONES ================= -->
-  <section class="section reveal">
+  <section class="section reveal" aria-labelledby="memories-title">
     <p class="eyebrow">starr's journey across the sky</p>
-    <p class="section-sub">Eleven months of little lights, from her very first day to her almost-first steps.</p>
+    <h2 class="section-title" id="memories-title">A year in little moments</h2>
+    <p class="section-sub">A continuous photo album from her first day to the beautiful little person she is becoming. Swipe through the stars.</p>
 
-    <div class="timeline">
-      <div class="tl-item">
-        <details>
-          <summary><span class="tl-age">DAY 1</span><span class="tl-cap">Welcome to the World</span><span class="tl-plus">+</span></summary>
-          <div class="tl-body"><div class="photo-slot"><img src="https://placehold.co/400x300/16234C/F4C86A?text=Day+1" alt="Day 1"></div>Replace this with the story of the day she arrived.</div>
-        </details>
-      </div>
-      <div class="tl-item">
-        <details>
-          <summary><span class="tl-age">MONTH 1</span><span class="tl-cap">First Smiles</span><span class="tl-plus">+</span></summary>
-          <div class="tl-body"><div class="photo-slot"><img src="https://placehold.co/400x300/16234C/F4C86A?text=Month+1" alt="Month 1"></div>Replace with a note about her first smile.</div>
-        </details>
-      </div>
-      <div class="tl-item">
-        <details>
-          <summary><span class="tl-age">MONTH 2</span><span class="tl-cap">Cooing Conversations</span><span class="tl-plus">+</span></summary>
-          <div class="tl-body"><div class="photo-slot"><img src="https://placehold.co/400x300/16234C/F4C86A?text=Month+2" alt="Month 2"></div>Replace with a note about this month.</div>
-        </details>
-      </div>
-      <div class="tl-item">
-        <details>
-          <summary><span class="tl-age">MONTH 3</span><span class="tl-cap">Rolling Over</span><span class="tl-plus">+</span></summary>
-          <div class="tl-body"><div class="photo-slot"><img src="https://placehold.co/400x300/16234C/F4C86A?text=Month+3" alt="Month 3"></div>Replace with a note about this month.</div>
-        </details>
-      </div>
-      <div class="tl-item">
-        <details>
-          <summary><span class="tl-age">MONTH 4</span><span class="tl-cap">Giggles Galore</span><span class="tl-plus">+</span></summary>
-          <div class="tl-body"><div class="photo-slot"><img src="https://placehold.co/400x300/16234C/F4C86A?text=Month+4" alt="Month 4"></div>Replace with a note about this month.</div>
-        </details>
-      </div>
-      <div class="tl-item">
-        <details>
-          <summary><span class="tl-age">MONTH 5</span><span class="tl-cap">Reaching &amp; Grabbing</span><span class="tl-plus">+</span></summary>
-          <div class="tl-body"><div class="photo-slot"><img src="https://placehold.co/400x300/16234C/F4C86A?text=Month+5" alt="Month 5"></div>Replace with a note about this month.</div>
-        </details>
-      </div>
-      <div class="tl-item">
-        <details>
-          <summary><span class="tl-age">MONTH 6</span><span class="tl-cap">First Taste of Food</span><span class="tl-plus">+</span></summary>
-          <div class="tl-body"><div class="photo-slot"><img src="https://placehold.co/400x300/16234C/F4C86A?text=Month+6" alt="Month 6"></div>Replace with a note about this month.</div>
-        </details>
-      </div>
-      <div class="tl-item">
-        <details>
-          <summary><span class="tl-age">MONTH 7</span><span class="tl-cap">Sitting Up Solo</span><span class="tl-plus">+</span></summary>
-          <div class="tl-body"><div class="photo-slot"><img src="https://placehold.co/400x300/16234C/F4C86A?text=Month+7" alt="Month 7"></div>Replace with a note about this month.</div>
-        </details>
-      </div>
-      <div class="tl-item">
-        <details>
-          <summary><span class="tl-age">MONTH 8</span><span class="tl-cap">Peekaboo Pro</span><span class="tl-plus">+</span></summary>
-          <div class="tl-body"><div class="photo-slot"><img src="https://placehold.co/400x300/16234C/F4C86A?text=Month+8" alt="Month 8"></div>Replace with a note about this month.</div>
-        </details>
-      </div>
-      <div class="tl-item">
-        <details>
-          <summary><span class="tl-age">MONTH 9</span><span class="tl-cap">Crawling Adventures</span><span class="tl-plus">+</span></summary>
-          <div class="tl-body"><div class="photo-slot"><img src="https://placehold.co/400x300/16234C/F4C86A?text=Month+9" alt="Month 9"></div>Replace with a note about this month.</div>
-        </details>
-      </div>
-      <div class="tl-item">
-        <details>
-          <summary><span class="tl-age">MONTH 10</span><span class="tl-cap">Cruising the Furniture</span><span class="tl-plus">+</span></summary>
-          <div class="tl-body"><div class="photo-slot"><img src="https://placehold.co/400x300/16234C/F4C86A?text=Month+10" alt="Month 10"></div>Replace with a note about this month.</div>
-        </details>
-      </div>
-      <div class="tl-item">
-        <details>
-          <summary><span class="tl-age">MONTH 11</span><span class="tl-cap">Almost Walking</span><span class="tl-plus">+</span></summary>
-          <div class="tl-body"><div class="photo-slot"><img src="https://placehold.co/400x300/16234C/F4C86A?text=Month+11" alt="Month 11"></div>Replace with a note about this month, right before her big day.</div>
-        </details>
-      </div>
+    <!--
+      MILESTONE PHOTO SETUP:
+      Upload images as `images/milestones/01.jpg` through `50.jpg`, or replace the
+      generated paths in the `milestonePhotos` list below and customize the captions.
+    -->
+    <div class="memory-album" id="memoryAlbum" role="region" aria-roledescription="carousel" aria-label="Starr's milestone photo album" tabindex="0">
+      <div class="memory-track" id="memoryTrack"></div>
+    </div>
+    <div class="memory-controls">
+      <button class="memory-button" id="memoryPrev" type="button" aria-label="Show previous milestone photo">‹</button>
+      <div class="memory-progress" aria-hidden="true"><span id="memoryProgress"></span></div>
+      <p class="memory-count" id="memoryCount" aria-live="polite">1 / 50</p>
+      <button class="memory-button" id="memoryNext" type="button" aria-label="Show next milestone photo">›</button>
     </div>
   </section>
 
-</div>
+</main>
 
 <!-- ================= CLOSING FULL SCREEN ================= -->
 <section class="closing full-bleed">
@@ -1068,7 +1083,7 @@
 
 <footer>
   <span class="fname">Starr Azrielle</span>
-  With love and thanks for celebrating this night with us.
+  With love and thanks for celebrating this day with us.
 </footer>
 
 <script>
@@ -1121,6 +1136,10 @@
   // ---------- reveal on scroll ----------
   (function(){
     var els = document.querySelectorAll('.reveal');
+    if(!('IntersectionObserver' in window)){
+      els.forEach(function(el){ el.classList.add('visible'); });
+      return;
+    }
     var obs = new IntersectionObserver(function(entries){
       entries.forEach(function(e){
         if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); }
@@ -1136,46 +1155,194 @@
     var fab = document.getElementById('musicFab');
     var playing = false;
 
-    function updateFab(){
-      fab.textContent = playing ? '♪' : '✕';
+    function updateControls(){
+      fab.textContent = playing ? '♪' : '▷';
+      fab.setAttribute('aria-label', playing ? 'Pause background music' : 'Play background music');
+      fab.setAttribute('aria-pressed', String(playing));
+    }
+    function playMusic(){
+      return bgm.play().then(function(){
+        playing = true;
+        updateControls();
+      }).catch(function(){
+        playing = false;
+        updateControls();
+      });
     }
     pill.addEventListener('click', function(){
-      bgm.play().catch(function(){ /* file not added yet, or autoplay blocked */ });
-      playing = true;
       pill.style.display = 'none';
       fab.classList.add('show');
-      updateFab();
+      playMusic();
     });
     fab.addEventListener('click', function(){
-      if(playing){ bgm.pause(); } else { bgm.play().catch(function(){}); }
-      playing = !playing;
-      updateFab();
+      if(playing){
+        bgm.pause();
+        playing = false;
+        updateControls();
+      } else {
+        playMusic();
+      }
     });
   })();
 
   // ---------- family photo auto-slider ----------
   (function(){
     var track = document.getElementById('sliderTrack');
-    var dots = document.querySelectorAll('#sliderDots span');
+    var slider = document.getElementById('familySlider');
+    var dots = document.querySelectorAll('#sliderDots button');
     var slides = track.children.length;
     var idx = 0;
+    var interval;
+    var startX = 0;
     function go(i){
-      idx = i % slides;
+      idx = (i + slides) % slides;
       track.style.transform = 'translateX(-' + (idx*100) + '%)';
-      dots.forEach(function(d, di){ d.classList.toggle('active', di===idx); });
+      dots.forEach(function(d, di){
+        var active = di === idx;
+        d.classList.toggle('active', active);
+        d.setAttribute('aria-current', String(active));
+      });
     }
-    setInterval(function(){ go(idx+1); }, 4000);
+    function startAuto(){
+      window.clearInterval(interval);
+      interval = window.setInterval(function(){ go(idx+1); }, 4000);
+    }
+    document.getElementById('sliderPrev').addEventListener('click', function(){ go(idx-1); startAuto(); });
+    document.getElementById('sliderNext').addEventListener('click', function(){ go(idx+1); startAuto(); });
+    dots.forEach(function(dot, dotIndex){
+      dot.addEventListener('click', function(){ go(dotIndex); startAuto(); });
+    });
+    slider.addEventListener('keydown', function(event){
+      if(event.key === 'ArrowLeft'){ event.preventDefault(); go(idx-1); startAuto(); }
+      if(event.key === 'ArrowRight'){ event.preventDefault(); go(idx+1); startAuto(); }
+    });
+    slider.addEventListener('pointerdown', function(event){ startX = event.clientX; });
+    slider.addEventListener('pointerup', function(event){
+      var distance = event.clientX - startX;
+      if(Math.abs(distance) > 40){ go(distance > 0 ? idx-1 : idx+1); startAuto(); }
+    });
+    slider.addEventListener('mouseenter', function(){ window.clearInterval(interval); });
+    slider.addEventListener('mouseleave', startAuto);
+    slider.addEventListener('focusin', function(){ window.clearInterval(interval); });
+    slider.addEventListener('focusout', function(event){ if(!slider.contains(event.relatedTarget)){ startAuto(); } });
+    startAuto();
+  })();
+
+  // ---------- milestone memory album ----------
+  (function(){
+    var track = document.getElementById('memoryTrack');
+    var album = document.getElementById('memoryAlbum');
+    var count = document.getElementById('memoryCount');
+    var progress = document.getElementById('memoryProgress');
+    var totalPhotos = 50;
+    var activeIndex = 0;
+    var interval;
+    var dragStart = 0;
+    var scrollStart = 0;
+    var isDragging = false;
+
+    // Keep your uploads in images/milestones/ as 01.jpg through 50.jpg,
+    // or replace each generated source/caption below with your preferred values.
+    var milestonePhotos = Array.from({length:totalPhotos}, function(_, index){
+      var number = String(index + 1).padStart(2, '0');
+      return {
+        src:'images/milestones/' + number + '.jpg',
+        caption:'Little moment ' + String(index + 1)
+      };
+    });
+
+    function placeholder(index){
+      return 'https://placehold.co/600x800/16234C/F4C86A?text=Milestone+' + String(index + 1);
+    }
+    function updateStatus(index){
+      activeIndex = index;
+      count.textContent = String(index + 1) + ' / ' + String(milestonePhotos.length);
+      progress.style.width = ((index + 1) / milestonePhotos.length * 100) + '%';
+    }
+    milestonePhotos.forEach(function(photo, index){
+      var slide = document.createElement('article');
+      var image = document.createElement('img');
+      var label = document.createElement('p');
+      slide.className = 'memory-slide';
+      slide.setAttribute('aria-label', 'Milestone photo ' + String(index + 1) + ' of ' + String(milestonePhotos.length));
+      image.src = photo.src;
+      image.alt = photo.caption;
+      image.loading = index < 2 ? 'eager' : 'lazy';
+      image.addEventListener('error', function(){
+        if(!image.dataset.fallback){
+          image.dataset.fallback = 'true';
+          image.src = placeholder(index);
+        }
+      });
+      label.className = 'memory-slide-label';
+      label.textContent = photo.caption;
+      slide.appendChild(image);
+      slide.appendChild(label);
+      track.appendChild(slide);
+    });
+
+    var slides = Array.prototype.slice.call(track.children);
+    function show(index, behavior){
+      var next = (index + slides.length) % slides.length;
+      slides[next].scrollIntoView({behavior:behavior || 'smooth', block:'nearest', inline:'center'});
+      updateStatus(next);
+    }
+    function startAuto(){
+      if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){ return; }
+      window.clearInterval(interval);
+      interval = window.setInterval(function(){ show(activeIndex + 1); }, 4200);
+    }
+    function stopAuto(){ window.clearInterval(interval); }
+    document.getElementById('memoryPrev').addEventListener('click', function(){ show(activeIndex - 1); startAuto(); });
+    document.getElementById('memoryNext').addEventListener('click', function(){ show(activeIndex + 1); startAuto(); });
+    album.addEventListener('keydown', function(event){
+      if(event.key === 'ArrowLeft'){ event.preventDefault(); show(activeIndex - 1); startAuto(); }
+      if(event.key === 'ArrowRight'){ event.preventDefault(); show(activeIndex + 1); startAuto(); }
+    });
+    track.addEventListener('pointerdown', function(event){
+      isDragging = true;
+      dragStart = event.clientX;
+      scrollStart = track.scrollLeft;
+      track.classList.add('is-dragging');
+      track.setPointerCapture(event.pointerId);
+      stopAuto();
+    });
+    track.addEventListener('pointermove', function(event){
+      if(isDragging){ track.scrollLeft = scrollStart - (event.clientX - dragStart); }
+    });
+    function endDrag(){
+      isDragging = false;
+      track.classList.remove('is-dragging');
+      startAuto();
+    }
+    track.addEventListener('pointerup', endDrag);
+    track.addEventListener('pointercancel', endDrag);
+    album.addEventListener('mouseenter', stopAuto);
+    album.addEventListener('mouseleave', startAuto);
+    album.addEventListener('focusin', stopAuto);
+    album.addEventListener('focusout', function(event){ if(!album.contains(event.relatedTarget)){ startAuto(); } });
+    if('IntersectionObserver' in window){
+      var observer = new IntersectionObserver(function(entries){
+        entries.forEach(function(entry){
+          if(entry.isIntersecting){ updateStatus(slides.indexOf(entry.target)); }
+        });
+      }, {root:track, threshold:0.65});
+      slides.forEach(function(slide){ observer.observe(slide); });
+    }
+    updateStatus(0);
+    startAuto();
   })();
 
   // ---------- add to calendar (.ics) ----------
   document.getElementById('addToCal').addEventListener('click', function(){
+    var timestamp = new Date().toISOString().replace(/[-:]/g, '').replace(/\.\d{3}Z$/, 'Z');
     var ics = [
       'BEGIN:VCALENDAR',
       'VERSION:2.0',
       'PRODID:-//Starr Azrielle//Christening//EN',
       'BEGIN:VEVENT',
       'UID:'+Date.now()+'@starrazrielle',
-      'DTSTAMP:20260101T000000Z',
+      'DTSTAMP:'+timestamp,
       'DTSTART:20260823T020000Z',
       'DTEND:20260823T050000Z',
       "SUMMARY:Starr Azrielle's Christening & First Birthday",
