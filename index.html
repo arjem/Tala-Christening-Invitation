@@ -1284,7 +1284,12 @@
     var slides = Array.prototype.slice.call(track.children);
     function show(index, behavior){
       var next = (index + slides.length) % slides.length;
-      slides[next].scrollIntoView({behavior:behavior || 'smooth', block:'nearest', inline:'center'});
+      var slide = slides[next];
+      var left = slide.offsetLeft - (track.clientWidth - slide.clientWidth) / 2;
+      track.scrollTo({
+        left:left,
+        behavior:behavior || 'smooth'
+      });
       updateStatus(next);
     }
     function startAuto(){
@@ -1330,7 +1335,19 @@
       slides.forEach(function(slide){ observer.observe(slide); });
     }
     updateStatus(0);
-    startAuto();
+
+    if('IntersectionObserver' in window){
+      var albumVisibility = new IntersectionObserver(function(entries){
+        if(entries[0].isIntersecting){
+          startAuto();
+        }else{
+          stopAuto();
+        }
+      }, {threshold:0.2});
+      albumVisibility.observe(album);
+    }else{
+      startAuto();
+    }
   })();
 
   // ---------- add to calendar (.ics) ----------
