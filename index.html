@@ -1541,33 +1541,20 @@ update();
     }
   })();
 
-  // ---------- add to calendar (.ics) ----------
+  // ---------- add to calendar (Google Calendar) ----------
   document.getElementById('addToCal').addEventListener('click', function(){
-    var timestamp = new Date().toISOString().replace(/[-:]/g, '').replace(/\.\d{3}Z$/, 'Z');
-    var ics = [
-      'BEGIN:VCALENDAR',
-      'VERSION:2.0',
-      'PRODID:-//Starr Azrielle//Christening//EN',
-      'BEGIN:VEVENT',
-      'UID:'+Date.now()+'@starrazrielle',
-      'DTSTAMP:'+timestamp,
-      'DTSTART:20260823T020000Z',
-      'DTEND:20260823T050000Z',
-      "SUMMARY:Starr Azrielle's Christening & First Birthday",
-      'DESCRIPTION:Baptism at St. Vincent Ferrer Parish Church\\, Poblacion District II\\, San Vicente\\, Camarines Norte. Reception follows at Tindahan ni Kuya\\, San Vicente Road\\, Purok-2\\, San Vicente\\, Camarines Norte.',
-      'LOCATION:St. Vincent Ferrer Parish Church\\, Poblacion District II\\, San Vicente\\, Camarines Norte',
-      'END:VEVENT',
-      'END:VCALENDAR'
-    ].join('\r\n');
-    var blob = new Blob([ics], {type:'text/calendar'});
-    var url = URL.createObjectURL(blob);
-    var a = document.createElement('a');
-    a.href = url;
-    a.download = 'Starr-Azrielle-Christening.ics';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
+
+    var title='Starr Azrielle (Tala) - Christening & First Birthday';
+    var details='Join us as we celebrate Tala\'s Christening and First Birthday. Baptism at St. Vincent Ferrer Parish Church followed by a reception at Francisco Residence (Tindahan ni Kuya).';
+    var location='St. Vincent Ferrer Parish Church, San Vicente, Camarines Norte';
+
+    var url='https://calendar.google.com/calendar/render?action=TEMPLATE'
+      +'&text='+encodeURIComponent(title)
+      +'&dates=20260823T020000Z/20260823T050000Z'
+      +'&details='+encodeURIComponent(details)
+      +'&location='+encodeURIComponent(location);
+
+    window.open(url,'_blank','noopener');
   });
 </script>
 
