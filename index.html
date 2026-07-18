@@ -349,30 +349,32 @@
   @keyframes cue{0%,100%{transform:scaleY(0.6); opacity:0.4;} 50%{transform:scaleY(1); opacity:1;}}
 
   /* ---------- name meaning ---------- */
-  .meaning-grid{
+@media (min-width:992px){
+
+.meaning-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:18px;
+    align-items:stretch;
+}
+
+.meaning-card{
     display:flex;
     flex-direction:column;
-    gap:16px;
-    margin-bottom:26px;
-  }
-  .meaning-card{
-    padding:22px;
-    border:1px solid var(--card-line);
-    border-radius:4px;
-    background:rgba(244,200,106,0.03);
-    text-align:center;
-  }
-  .meaning-card .word{
-    font-family:'Fraunces', serif;
-    font-style:italic;
-    font-size:1.5rem;
-    color:var(--gold);
-    margin-bottom:8px;
-  }
-  .meaning-card .def{
-    color:var(--ivory-dim);
-    font-size:0.9rem;
-  }
+    justify-content:center;
+    min-height:180px;
+    padding:32px;
+}
+
+.meaning-card .word{
+    margin-bottom:20px;
+}
+
+.meaning-card .def{
+    margin:0;
+}
+
+}
   .sky-note{
     text-align:center;
     font-size:0.98rem;
