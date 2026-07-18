@@ -498,37 +498,6 @@
   /* ---------- event / venue cards ---------- */
   
 
-/* ===== Premium desktop family gallery ===== */
-.slider{
-    width:min(420px,36vw);
-    max-width:420px;
-    aspect-ratio:3/4;
-    margin:40px auto 0;
-    overflow:hidden;
-    border-radius:8px;
-    box-shadow:0 18px 40px rgba(0,0,0,.35);
-}
-
-.slider-track{
-    height:100%;
-}
-
-.slider-track img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-}
-
-.slider-control{
-    width:44px;
-    height:44px;
-}
-
-.slider-dots{
-    margin-top:18px;
-}
-
-
 .card{
     border:1px solid var(--card-line);
     background:linear-gradient(180deg, rgba(244,200,106,0.05), rgba(244,200,106,0.015));
@@ -906,6 +875,63 @@ details{
 max-width:760px;
 margin-left:auto;
 margin-right:auto;
+}
+}
+
+
+@media (min-width:992px){
+
+/* Family slider ONLY */
+#familySlider{
+    width:340px;
+    max-width:340px;
+    margin:40px auto 0 !important;
+}
+#familySlider .slider-track{
+    height:100%;
+}
+#familySlider .slider-track img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+/* Venue cards */
+#events{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:36px;
+}
+#events>.eyebrow{
+    grid-column:1/-1;
+    text-align:center;
+    margin-bottom:10px;
+}
+#events>.card{
+    width:100%!important;
+    margin:0!important;
+}
+
+/* Save date */
+.std-card{
+    max-width:620px;
+    margin:0 auto;
+}
+
+/* Contacts */
+.section .card:has(.contact-row){
+    max-width:760px;
+    margin:0 auto;
+}
+.card:has(.contact-row) .contact-row{
+    display:grid;
+    grid-template-columns:1fr auto;
+}
+
+/* FAQ */
+.faq-list{
+    max-width:760px;
+    margin:0 auto;
 }
 }
 
