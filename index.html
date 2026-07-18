@@ -1221,12 +1221,12 @@ update();
     var scrollStart = 0;
     var isDragging = false;
 
-    // Keep your uploads in images/milestones/ as 01.jpg through 50.jpg,
+    // Keep your uploads in images/ as 01.jpg through 50.jpg,
     // or replace each generated source/caption below with your preferred values.
     var milestonePhotos = Array.from({length:totalPhotos}, function(_, index){
       var number = String(index + 1).padStart(2, '0');
       return {
-        src:'images/milestones/' + number + '.jpg',
+        src:'images/' + number + '.jpg',
         caption:'Little moment ' + String(index + 1)
       };
     });
