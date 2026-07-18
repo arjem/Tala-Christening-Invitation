@@ -179,7 +179,6 @@
   /* ---------- hero ---------- */
   .hero{
     position:relative;
-    background:#060B1E;
     isolation:isolate;
     width:100vw;
     min-height:100vh;
@@ -731,65 +730,26 @@
   footer .fname{font-family:'Fraunces', serif; font-style:italic; color:var(--gold); font-size:1.1rem; display:block; margin-bottom:6px;}
 
   
-  /* ===== v2.0 Luxury Hero ===== */
-  .hero::before{
-    content:'';
-    position:absolute;
-    inset:0;
-    background:
-      radial-gradient(circle at 50% 20%, rgba(244,200,106,.18), transparent 45%),
-      linear-gradient(to bottom, rgba(6,11,30,.18), rgba(6,11,30,.78));
-    z-index:-1;
-    pointer-events:none;
-  }
-  .hero-topbar{
-    position:absolute;
-    top:18px;
-    left:50%;
-    transform:translateX(-50%);
-    display:flex;
-    gap:14px;
-    padding:10px 18px;
-    border-radius:999px;
-    background:rgba(8,16,40,.45);
-    backdrop-filter:blur(18px);
-    border:1px solid rgba(244,200,106,.25);
-    z-index:5;
-  }
-  .gold-particles{
-    position:absolute;
-    inset:0;
-    pointer-events:none;
-    overflow:hidden;
-    z-index:0;
-  }
-  .gold-particles span{
-    position:absolute;
-    width:4px;height:4px;
-    background:#F4C86A;
-    border-radius:50%;
-    filter:blur(.4px);
-    animation:floatGold linear infinite;
-  }
-  @keyframes floatGold{
-    from{transform:translateY(20px);opacity:0}
-    20%{opacity:.9}
-    to{transform:translateY(-110vh);opacity:0}
-  }
-  .hero-name{
-    position:absolute;
-    bottom:110px;
-    left:50%;
-    transform:translateX(-50%);
-    width:100%;
-    padding:0 20px;
-    animation:heroGlow 8s infinite;
-  }
-  @keyframes heroGlow{
-    0%,100%{filter:drop-shadow(0 0 8px rgba(244,200,106,.15))}
-    50%{filter:drop-shadow(0 0 18px rgba(244,200,106,.45))}
-  }
-
+/* ===== v2.0 Mobile Hero Refinement ===== */
+.hero{padding:32px 20px 24px;justify-content:flex-end}
+.hero-topbar{
+position:absolute;top:8px;left:50%;transform:translateX(-50%);
+background:rgba(8,16,40,.18);backdrop-filter:blur(10px);
+border:none;box-shadow:none;padding:6px 12px;border-radius:999px;z-index:10}
+.hero-topbar .count-box{background:transparent;border:none;width:auto;padding:0 6px}
+.hero-topbar .num{font-size:1rem}
+.hero-topbar .lbl{font-size:.45rem}
+.hero-name{
+font-size:clamp(1.7rem,6vw,2.2rem);
+line-height:1.05;
+margin-top:auto;
+}
+.hero-name .nickname{display:block;font-size:clamp(3rem,12vw,4.2rem);font-style:italic}
+.hero-meta{margin-top:10px;text-align:center}
+.hero-date{font-family:'Space Mono',monospace;font-size:.72rem;letter-spacing:.08em;color:var(--gold);margin-top:8px}
+.music-fab{display:flex!important;top:18px;right:14px;bottom:auto;position:fixed}
+.music-pill{display:none!important}
+.scroll-cue{margin-top:22px}
 
 @media (min-width:600px){
     .meaning-grid{flex-direction:row;}
@@ -823,33 +783,23 @@
     </svg>
 
     <p class="eyebrow">a little star's big day</p>
-    <h1 class="hero-name">Starr Azrielle (Tala)</h1>
+    <h1 class="hero-name">Starr Azrielle<span class="nickname">Tala</span></h1>
     <svg class="name-swash" viewBox="0 0 200 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
       <path d="M4 12 C 40 2, 70 20, 100 10 S 160 2, 196 12" stroke="#D9B26B" stroke-width="1" fill="none" opacity="0.8"/>
       <circle cx="100" cy="10.5" r="1.8" fill="#F4C86A"/>
     </svg>
-    <p class="hero-occasion">Christening <span>&amp;</span> First Birthday</p>
+    <div class="hero-meta"><p class="hero-occasion">Christening <span>&amp;</span> First Birthday</p><div class="hero-date">August 23, 2026 • 10:00 AM</div></div>
 
     <button class="music-pill" id="musicPill" type="button">♪ Tap to play music</button>
 
     <div class="hero-topbar">
-      <div class="countdown" id="countdown">
-        <div class="count-box"><div class="num" id="cd-days">--</div><div class="lbl">Days</div></div>
-        <div class="count-box"><div class="num" id="cd-hours">--</div><div class="lbl">Hrs</div></div>
-        <div class="count-box"><div class="num" id="cd-mins">--</div><div class="lbl">Min</div></div>
-        <div class="count-box"><div class="num" id="cd-secs">--</div><div class="lbl">Sec</div></div>
-      </div>
-    </div>
-
-    <div class="gold-particles">
-      <span style="left:15%;bottom:0;animation-duration:10s;"></span>
-      <span style="left:30%;bottom:-10px;animation-duration:14s;"></span>
-      <span style="left:48%;bottom:-20px;animation-duration:12s;"></span>
-      <span style="left:68%;bottom:-8px;animation-duration:16s;"></span>
-      <span style="left:84%;bottom:-15px;animation-duration:11s;"></span>
-    </div>
-
-    <div class="scroll-cue"><span class="line"></span>scroll to explore the celebration</div>
+<div class="countdown" id="countdown">
+<div class="count-box"><div class="num" id="cd-days">--</div><div class="lbl">D</div></div>
+<div class="count-box"><div class="num" id="cd-hours">--</div><div class="lbl">H</div></div>
+<div class="count-box"><div class="num" id="cd-mins">--</div><div class="lbl">M</div></div>
+<div class="count-box"><div class="num" id="cd-secs">--</div><div class="lbl">S</div></div>
+</div></div>
+<div class="scroll-cue"><span class="line"></span>scroll to explore the celebration</div>
   </section>
 
   <!-- ================= NAME MEANING ================= -->
@@ -1218,8 +1168,7 @@
     var bgm = document.getElementById('bgm');
     var pill = document.getElementById('musicPill');
     var fab = document.getElementById('musicFab');
-    var playing = false;
-    window.addEventListener('load', function(){ playMusic(); fab.classList.add('show'); pill.style.display='none'; });
+    var playing=false;window.addEventListener('load',()=>{fab.classList.add('show');playMusic();});
 
     function updateControls(){
       fab.textContent = playing ? '♪' : '▷';
