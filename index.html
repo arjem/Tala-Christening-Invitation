@@ -1220,7 +1220,7 @@ update();
     var album = document.getElementById('memoryAlbum');
     var count = document.getElementById('memoryCount');
     var progress = document.getElementById('memoryProgress');
-    var totalPhotos = 50;
+    var totalPhotos = 47;
     var activeIndex = 0;
     var interval;
     var dragStart = 0;
@@ -1232,7 +1232,7 @@ update();
     var milestonePhotos = Array.from({length:totalPhotos}, function(_, index){
       var number = String(index + 1).padStart(2, '0');
       return {
-        src:'images/' + number + '.jpg',
+        src:'images/' + number + '.jpeg',
         caption:'Little moment ' + String(index + 1)
       };
     });
