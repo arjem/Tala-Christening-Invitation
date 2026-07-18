@@ -147,7 +147,7 @@
   .divider{
     display:flex;
     align-items:center;
-    justify-content:center;
+    justify-content:flex-end;
     gap:10px;
     width:100%;
     max-width:220px;
@@ -187,9 +187,9 @@
     display:flex;
     flex-direction:column;
     align-items:center;
-    justify-content:center;
+    justify-content:flex-end;
     text-align:center;
-    padding:72px 24px 44px;
+    padding:80px 24px 56px;
     overflow:hidden;
   }
   .hero-background,
@@ -203,7 +203,7 @@
     width:100%;
     height:100%;
     object-fit:cover;
-    object-position:center;
+    object-position:center top;
     display:block;
   }
   .hero::after{
@@ -220,7 +220,7 @@
   .hero .eyebrow{margin-bottom:16px;}
 
   .hero-name{
-    font-size:clamp(3rem, 12vw, 5rem);
+    font-size:clamp(2.4rem,10vw,3.8rem);
     font-style:italic;
     font-weight:600;
     line-height:1.08;
@@ -235,7 +235,7 @@
   .hero-occasion{
     margin-top:16px;
     font-family:'Fraunces', serif;
-    font-size:1.1rem;
+    font-size:0.95rem;
     color:var(--ivory);
     font-weight:400;
   }
@@ -274,7 +274,7 @@
     color:var(--gold);
     display:none;
     align-items:center;
-    justify-content:center;
+    justify-content:flex-end;
     cursor:pointer;
     box-shadow:0 4px 18px rgba(0,0,0,0.4);
   }
@@ -296,7 +296,7 @@
     display:flex;
     flex-direction:column;
     align-items:center;
-    justify-content:center;
+    justify-content:flex-end;
     gap:2px;
     background:radial-gradient(circle at 50% 40%, rgba(244,200,106,0.16), rgba(6,11,30,0.28) 70%);
     border:1px solid var(--gold-soft);
@@ -306,7 +306,7 @@
   .date-badge .d{font-family:'Space Mono', monospace; font-size:0.76rem; letter-spacing:0.05em; color:var(--gold); text-align:center;}
   .date-badge .t{font-family:'Space Mono', monospace; font-size:0.6rem; letter-spacing:0.05em; color:var(--ivory-dim); text-align:center;}
 
-  .countdown{display:flex; justify-content:center; gap:8px; flex-wrap:wrap;}
+  .countdown{display:flex; justify-content:flex-end; gap:8px; flex-wrap:wrap;}
   .count-box{
     background:rgba(244,200,106,0.07);
     border:1px solid var(--card-line);
@@ -448,7 +448,7 @@
   .slider-control.next{right:12px;}
   .slider-dots{
     display:flex;
-    justify-content:center;
+    justify-content:flex-end;
     gap:7px;
     margin-top:14px;
   }
@@ -466,7 +466,7 @@
   /* ---------- dress code ---------- */
   .dress-row{
     display:flex;
-    justify-content:center;
+    justify-content:flex-end;
     gap:36px;
     margin:26px 0 10px;
   }
@@ -668,7 +668,7 @@
     text-transform:uppercase;
     color:var(--ivory);
   }
-  .memory-controls{display:flex; align-items:center; justify-content:center; gap:16px; margin-top:6px;}
+  .memory-controls{display:flex; align-items:center; justify-content:flex-end; gap:16px; margin-top:6px;}
   .memory-progress{width:106px; height:1px; background:var(--card-line); overflow:hidden;}
   .memory-progress span{display:block; width:2%; height:100%; background:var(--gold); transition:width 0.35s ease;}
   .memory-count{font-family:'Space Mono', monospace; font-size:0.66rem; letter-spacing:0.12em; color:var(--ivory-dim); min-width:72px; text-align:center;}
@@ -692,7 +692,7 @@
     display:flex;
     flex-direction:column;
     align-items:center;
-    justify-content:center;
+    justify-content:flex-end;
     text-align:center;
     padding:60px 24px;
     overflow:hidden;
@@ -744,7 +744,8 @@
 <audio id="bgm" loop preload="none">
   <source src="audio/twinkle.mp3" type="audio/mp3">
 </audio>
-<button class="music-fab" id="musicFab" type="button" aria-label="Pause background music" aria-pressed="true">♪</button>
+<button class="music-pill" id="musicPill" type="button" style="display:none">Play</button>
+<button class="music-fab show" id="musicFab" type="button" aria-label="Pause background music" aria-pressed="true">♪</button>
 
 <main class="wrap" id="main-content">
 
@@ -768,13 +769,7 @@
       <circle cx="100" cy="10.5" r="1.8" fill="#F4C86A"/>
     </svg>
     <p class="hero-occasion">Christening <span>&amp;</span> First Birthday</p>
-
-    
-
-    
-      <div class="countdown" id="countdown">
-        <div class="count-box"><div class="num" id="cd-days">--</div><div class="lbl">Days</div></div>
-        <div class="count-box"><div class="num" id="cd-hours">--</div><div class="lbl">Hrs</div></div>
+<div class="count-box"><div class="num" id="cd-hours">--</div><div class="lbl">Hrs</div></div>
         <div class="count-box"><div class="num" id="cd-mins">--</div><div class="lbl">Min</div></div>
         <div class="count-box"><div class="num" id="cd-secs">--</div><div class="lbl">Sec</div></div>
       </div>
@@ -1065,7 +1060,7 @@
 </main>
 
 
-<section class="section full-bleed" id="countdown-finale" style="min-height:100svh;display:flex;align-items:center;justify-content:center;text-align:center;background:linear-gradient(180deg,#08132b,#060B1E);">
+<section class="section full-bleed" id="countdown-finale" style="min-height:100svh;display:flex;align-items:center;justify-content:flex-end;text-align:center;background:linear-gradient(180deg,#08132b,#060B1E);">
   <div class="wrap">
     <p class="eyebrow">our celebration begins in</p>
     <h2 class="section-title" style="font-size:2.4rem;margin-bottom:28px;">See You Soon</h2>
@@ -1162,41 +1157,18 @@
   })();
 
   // ---------- music toggle ----------
-  (function(){
-    var bgm = document.getElementById('bgm');
-    var pill = document.getElementById('musicPill');
-    var fab = document.getElementById('musicFab');
-    var playing = false;
-
-    function updateControls(){
-      fab.textContent = playing ? '♪' : '▷';
-      fab.setAttribute('aria-label', playing ? 'Pause background music' : 'Play background music');
-      fab.setAttribute('aria-pressed', String(playing));
-    }
-    function playMusic(){
-      return bgm.play().then(function(){
-        playing = true;
-        updateControls();
-      }).catch(function(){
-        playing = false;
-        updateControls();
-      });
-    }
-    pill.addEventListener('click', function(){
-      pill.style.display = 'none';
-      fab.classList.add('show');
-      playMusic();
-    });
-    fab.addEventListener('click', function(){
-      if(playing){
-        bgm.pause();
-        playing = false;
-        updateControls();
-      } else {
-        playMusic();
-      }
-    });
-  })();
+(function(){
+const bgm=document.getElementById('bgm');
+const fab=document.getElementById('musicFab');
+let playing=false;
+function update(){fab.textContent=playing?'❚❚':'♪';}
+function play(){bgm.play().then(()=>{playing=true;update();}).catch(()=>{});}
+document.addEventListener('click',function init(){play();document.removeEventListener('click',init);},{once:true});
+window.addEventListener('load',play);
+fab.classList.add('show');
+fab.addEventListener('click',()=>{if(playing){bgm.pause();playing=false;}else{play();}update();});
+update();
+})();
 
   // ---------- family photo auto-slider ----------
   (function(){
