@@ -438,57 +438,6 @@
     position:relative;
   }
 
-  /* ---------- family slider ---------- */
-  .slider{
-    position:relative;
-    width:100%;
-    aspect-ratio:3/4;
-    border-radius:6px;
-    overflow:hidden;
-    border:1px solid var(--card-line);
-  }
-  .slider-track{
-    display:flex;
-    height:100%;
-    transition:transform 0.6s ease;
-    will-change:transform;
-  }
-  .slider-track img{width:100%; height:100%; object-fit:cover; flex:none;}
-  .slider-control{
-    position:absolute;
-    top:50%;
-    z-index:2;
-    width:42px;
-    height:42px;
-    border:1px solid var(--card-line);
-    border-radius:50%;
-    color:var(--ivory);
-    background:rgba(6,11,30,0.62);
-    font-size:1.45rem;
-    line-height:1;
-    cursor:pointer;
-    transform:translateY(-50%);
-  }
-  .slider-control:hover{background:var(--navy-mid);}
-  .slider-control.prev{left:12px;}
-  .slider-control.next{right:12px;}
-  .slider-dots{
-    display:flex;
-    justify-content:center;
-    gap:7px;
-    margin-top:14px;
-  }
-  .slider-dots button{
-    width:6px; height:6px;
-    padding:0;
-    border:0;
-    border-radius:50%;
-    background:var(--card-line);
-    transition:background 0.3s ease;
-    cursor:pointer;
-  }
-  .slider-dots button.active{background:var(--gold);}
-
   /* ---------- dress code ---------- */
   .dress-row{
     display:flex;
@@ -896,13 +845,6 @@ margin-right:auto;
 
 @media (min-width:992px){
 
-/* Family */
-#familySlider{
-width:340px;
-max-width:340px;
-margin:40px auto 0;
-}
-
 /* Venue */
 #events{
 display:grid;
@@ -1045,38 +987,6 @@ margin:0 auto;
     </svg>
     <span class="stem r"></span>
   </div>
-
-  <!-- ================= FAMILY SLIDER ================= -->
-  <section class="section reveal">
-    <p class="eyebrow">our little family</p>
-    <p class="section-sub">Meet Tala's humble and loving family—a happy household blessed with one son and two daughters. Their youngest, Tala, fills their home with laughter and joy, bringing smiles to everyone around her. Together, they cherish life's simple moments, supporting one another with love, kindness, and gratitude.</p>
-    <div class="slider" id="familySlider" role="region" aria-roledescription="carousel" aria-label="Family photos" tabindex="0">
-      <div class="slider-track" id="sliderTrack">
-        <img src="images/family/1.jpg" alt="Family photo 1">
-        <img src="images/family/2.jpg" alt="Family photo 2">
-        <img src="images/family/3.jpg" alt="Family photo 3">
-        <img src="images/family/4.jpg" alt="Family photo 4">
-      </div>
-      <button class="slider-control prev" id="sliderPrev" type="button" aria-label="Show previous family photo">‹</button>
-      <button class="slider-control next" id="sliderNext" type="button" aria-label="Show next family photo">›</button>
-    </div>
-    <div class="slider-dots" id="sliderDots">
-      <button class="active" type="button" aria-label="Show family photo 1" aria-current="true"></button>
-      <button type="button" aria-label="Show family photo 2" aria-current="false"></button>
-      <button type="button" aria-label="Show family photo 3" aria-current="false"></button>
-      <button type="button" aria-label="Show family photo 4" aria-current="false"></button>
-    </div>
-  </section> 
-
-  <div class="divider" aria-hidden="true">
-    <span class="stem l"></span>
-    <svg viewBox="0 0 60 20" xmlns="http://www.w3.org/2000/svg" style="width:52px;height:18px;flex:none;">
-      <path d="M2 10 Q 15 2, 30 10 T 58 10" stroke="#F4C86A" stroke-width="0.9" fill="none" opacity="0.85"/>
-      <circle cx="30" cy="10" r="2.4" fill="#F4C86A"/>
-      <circle cx="30" cy="10" r="4.6" stroke="#E8A9B8" stroke-width="0.6" fill="none" opacity="0.7"/>
-    </svg>
-    <span class="stem r"></span>
-  </div> 
 
   <!-- ================= DRESS CODE ================= -->
   <section class="section reveal">
@@ -1391,49 +1301,6 @@ fab.classList.add('show');
 fab.addEventListener('click',()=>{if(playing){bgm.pause();playing=false;}else{play();}update();});
 update();
 })();
-
-  // ---------- family photo auto-slider ----------
-  (function(){
-    var track = document.getElementById('sliderTrack');
-    var slider = document.getElementById('familySlider');
-    var dots = document.querySelectorAll('#sliderDots button');
-    var slides = track.children.length;
-    var idx = 0;
-    var interval;
-    var startX = 0;
-    function go(i){
-      idx = (i + slides) % slides;
-      track.style.transform = 'translateX(-' + (idx*100) + '%)';
-      dots.forEach(function(d, di){
-        var active = di === idx;
-        d.classList.toggle('active', active);
-        d.setAttribute('aria-current', String(active));
-      });
-    }
-    function startAuto(){
-      window.clearInterval(interval);
-      interval = window.setInterval(function(){ go(idx+1); }, 4000);
-    }
-    document.getElementById('sliderPrev').addEventListener('click', function(){ go(idx-1); startAuto(); });
-    document.getElementById('sliderNext').addEventListener('click', function(){ go(idx+1); startAuto(); });
-    dots.forEach(function(dot, dotIndex){
-      dot.addEventListener('click', function(){ go(dotIndex); startAuto(); });
-    });
-    slider.addEventListener('keydown', function(event){
-      if(event.key === 'ArrowLeft'){ event.preventDefault(); go(idx-1); startAuto(); }
-      if(event.key === 'ArrowRight'){ event.preventDefault(); go(idx+1); startAuto(); }
-    });
-    slider.addEventListener('pointerdown', function(event){ startX = event.clientX; });
-    slider.addEventListener('pointerup', function(event){
-      var distance = event.clientX - startX;
-      if(Math.abs(distance) > 40){ go(distance > 0 ? idx-1 : idx+1); startAuto(); }
-    });
-    slider.addEventListener('mouseenter', function(){ window.clearInterval(interval); });
-    slider.addEventListener('mouseleave', startAuto);
-    slider.addEventListener('focusin', function(){ window.clearInterval(interval); });
-    slider.addEventListener('focusout', function(event){ if(!slider.contains(event.relatedTarget)){ startAuto(); } });
-    startAuto();
-  })();
 
   // ---------- milestone memory album ----------
   (function(){
